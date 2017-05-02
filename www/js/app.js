@@ -40,7 +40,39 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           templateUrl: 'views/main.html'
         }
       }
+    })
+  .state('app.holidays', {
+      url: '/holidays',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/holidays.html'
+        }
+      }
+    })
+  .state('app.personal', {
+      url: '/personal',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/personal.html'
+        }
+      }
+    })
+  .state('app.report', {
+      url: '/report',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/report.html'
+        }
+      }
+    })
+  .state('app.login', {
+      url: '/login',
+      views: {
+        'menuContent': {
+          templateUrl: 'views/login.html'
+        }
+      }
     });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/main');
+  $urlRouterProvider.otherwise('/app/login');
 });
