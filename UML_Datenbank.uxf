@@ -4,18 +4,18 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>30</x>
-      <y>20</y>
+      <x>70</x>
+      <y>90</y>
       <w>210</w>
-      <h>190</h>
+      <h>220</h>
     </coordinates>
     <panel_attributes>user
 --
 - id
 - username
 - password
-- name
-- prename
+- lastname
+- firstname
 - function
 - target_hours
 - admin
@@ -27,26 +27,40 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>350</x>
-      <y>20</y>
-      <w>100</w>
-      <h>30</h>
+      <x>380</x>
+      <y>120</y>
+      <w>160</w>
+      <h>220</h>
     </coordinates>
-    <panel_attributes>times
---</panel_attributes>
+    <panel_attributes>worktime
+--
+- id
+- date
+- timeamfrom
+- timeamto
+- timepmfrom
+- timepmto
+- pause
+- restday
+- fsuser</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>180</x>
-      <y>360</y>
-      <w>100</w>
-      <h>30</h>
+      <x>260</x>
+      <y>430</y>
+      <w>140</w>
+      <h>200</h>
     </coordinates>
-    <panel_attributes>holiday
+    <panel_attributes>nonbusinesstime
 --
-</panel_attributes>
+- id
+- type
+- datefrom
+- dateto
+- fsuser
+- halfaday</panel_attributes>
     <additional_attributes/>
   </element>
 </diagram>

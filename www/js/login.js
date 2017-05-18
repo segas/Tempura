@@ -10,12 +10,12 @@ angular.module('login.controllers', [])
       .then(function (data) {
           //log in successfull
           //window.alert("Login funktioniert");
+          window.sessionStorage.setItem('account',JSON.stringify(data.userData));
           $state.go('app.main');
       }, function (data) {
           //log in failed
           var failureAlert = document.getElementById('login_failure_alert');
           failureAlert.innerHTML = "Passwort falsch";
-          //window.alert("Passwort falsch");
       });
   }
 

@@ -19,10 +19,11 @@ $username = $loginData->username;
 $password = $loginData->password;
 
 $userData = array('correct' => '',
-                'iduser' => '',
+                'id_user' => '',
+				'firstname' => '',
+				'lastname' => '',
 				'username' => '',
-				'prename' => '',
-				'name' => '');
+				'admin' => '');
 
 
 if(!empty($username) && !empty($password)){
@@ -33,7 +34,7 @@ if(!empty($username) && !empty($password)){
 	$password = mysqli_real_escape_string($con, $password);
 
 
-	$query = "SELECT iduser, username, prename, name FROM user WHERE username='".$username."' AND password='".$password."' LIMIT 1";
+	$query = "SELECT id_user, username, firstname, lastname, admin FROM user WHERE username='".$username."' AND password='".$password."' AND active='1' LIMIT 1";
 	$results = mysqli_query($con, $query) or die("Login error! Code: 003");
 	$match  = mysqli_num_rows($results);
 
@@ -43,10 +44,11 @@ if(!empty($username) && !empty($password)){
 	if($match > 0 ){
 			// login success
             		$userData['correct'] = 'True';
-			$userData['iduser'] = $res['iduser'];
-			$userData['prename'] = $res['prename'];
-			$userData['name'] = $res['name'];
+			$userData['id_user'] = $res['id_user'];
+			$userData['firstname'] = $res['firstname'];
+			$userData['lastname'] = $res['lastname'];
 			$userData['username'] = $res['username'];
+      $userData['admin'] = $res['admin'];
 			echo ('{"userData":'.json_encode($userData).', "error": {"code": "000","message": "The email or password you entered is correct."}}');
 	}else{
 		// login failed
