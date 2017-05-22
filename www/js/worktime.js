@@ -1,6 +1,7 @@
 angular.module('worktime.controllers', [])
 
 .controller('WorktimeCtrl', function($scope, $state, WorktimeListService){
+  $scope.worktimes = {};
   // Perform the login action when the user submits the login form
   $scope.getLast5Days = function () {
       var account = window.sessionStorage.getItem('account');
@@ -9,7 +10,8 @@ angular.module('worktime.controllers', [])
 
       WorktimeListService.listLast5Days(data)
       .then(function (data) {
-        console.log(JSON.stringify(data.worktime));
+        $scope.worktimes = data.worktime;
+        console.log(JSON.stringify($scope.worktimes));
       }, function (data) {
           //fail
       });
