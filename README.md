@@ -1,2 +1,0 @@
-# Tempura
-Tempura Zeiterfassungssystem
