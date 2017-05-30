@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-navbar hideBackButton="true">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Tempura</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h3>Tempura</h3>
+  <ion-item>
+    <ion-label>Date</ion-label>
+  </ion-item>
+  <ion-item type="item-text-wrap" >
+    <div class="row" >
+      <div class="col col-10">Datum</div>
+      <div class="col col-15">Von</div>
+      <div class="col col-15">Bis</div>
+      <div class="col col-15">Von</div>
+      <div class="col col-15">Bis</div>
+      <div class="col col-15">Pause</div>
+      <div class="col col-15">Ruhetag</div>
+    </div>
+    <div class="row" ng-controller='HomePage'  *ngFor="let day of worktimes">
+      <div class="col col-10">{{day.date}}</div>
+      <div class="col col-15">{{day.timeamfrom}}</div>
+      <div class="col col-15">{{day.timeamto}}</div>
+      <div class="col col-15">{{day.timepmfrom}}</div>
+      <div class="col col-15">{{day.timepmto}}</div>
+      <div class="col col-15">{{day.pause}}</div>
+      <div class="col col-15">{{day.restday}}</div>
+    </div>
+  </ion-item>
+</ion-content>
