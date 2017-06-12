@@ -8,10 +8,8 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Tempura</h3>
-  <ion-item>
-    <ion-label>Date</ion-label>
-  </ion-item>
+  <h3>Zeiterfassung</h3>
+
   <ion-item type="item-text-wrap" >
     <div class="row" >
       <div class="col col-10">Datum</div>
@@ -32,4 +30,20 @@
       <div class="col col-15">{{day.restday}}</div>
     </div>
   </ion-item>
+  <h3>Andere Einträge</h3>
+  <ion-item type="item-text-wrap">
+    <div class="row">
+      <div class="col col-10">Art</div>
+      <div class="col col-15">Datum von</div>
+      <div class="col col-15">Datum bis</div>
+      <div class="col col-15">halber Tag</div>
+    </div>
+    <div class="row" ng-controller='HomePage' *ngFor="let day of othertimes">
+      <div class="col col-10">{{day.type}}</div>
+      <div class="col col-15">{{day.datefrom}}</div>
+      <div class="col col-15">{{day.dateto}}</div>
+      <div class="col col-15">{{day.halfaday}}</div>
+    </div>
+  </ion-item>
+
 </ion-content>

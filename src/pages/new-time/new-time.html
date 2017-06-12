@@ -14,24 +14,59 @@
 
 
 <ion-content padding>
-  <form (ngSubmit)="loginUser()" #registerForm="ngForm">
+  <form (ngSubmit)="createNewTime()" #registerForm="ngForm">
     <ion-list>
+      <!--<ion-item>
+        <ion-select [(ngModel)]="newTime.type" name="type" placeholder="Art">
+          <ion-option value="work">Arbeit</ion-option>
+          <ion-option value="accident">Unfall</ion-option>
+          <ion-option value="illness">Krankheit</ion-option>
+          <ion-option value="military">Militär</ion-option>
+          <ion-option value="pregnancy">Schwangerschaft</ion-option>
+        </ion-select>
+      </ion-item>-->
       <ion-item>
-          <ion-select [(ngModel)]="newTime.type" name="type">
-            <ion-option value="work">Arbeit</ion-option>
-
-          </ion-select>
+        <ion-label>Datum:</ion-label>
+        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.date" name="date"></ion-datetime>
       </ion-item>
-
       <ion-item>
-        <ion-label fixed>Passwort</ion-label>
-        <ion-input [(ngModel)]="loginData.password" type="password" id="user_password"  name="password"></ion-input>
+        <ion-label>Von:</ion-label>
+        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timeamfrom" name="timeamfrom"></ion-datetime>
       </ion-item>
-      <ion-item><label class="item" id="login_failure_alert"style="color: red"></label></ion-item>
       <ion-item>
-        <button ion-button type="submit">Anmelden</button>
+        <ion-label>Bis:</ion-label>
+        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timeamto" name="timeamto"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Von:</ion-label>
+        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timepmfrom" name="timepmfrom"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Bis:</ion-label>
+        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timepmto" name="timepmto"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pause:</ion-label>
+        <ion-select placeholder="Pause" [(ngModel)]="newTime.pause" name="pause">
+          <ion-option value="0">0 Minuten</ion-option>
+          <ion-option value="15">15 Minuten</ion-option>
+          <ion-option value="30">30 Minuten</ion-option>
+          <ion-option value="45">45 Minuten</ion-option>
+          <ion-option value="60">1 Stunde</ion-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Ruhetage:</ion-label>
+        <ion-select placeholder="Ruhetag" [(ngModel)]="newTime.restday" name="restday">
+          <ion-option value="0">0 Tage</ion-option>
+          <ion-option value="50">0.5 Tage</ion-option>
+          <ion-option value="100">1 Tag</ion-option>
+        </ion-select>
       </ion-item>
     </ion-list>
+    <ion-item>
+      <button ion-button type="submit">Speichern</button>
+    </ion-item>
   </form>
 
 </ion-content>

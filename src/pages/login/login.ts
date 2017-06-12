@@ -3,7 +3,6 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { HomePage } from '../home/home';
-import {NewTimePage} from "../new-time/new-time";
 
 /**
  * Generated class for the LoginPage page.

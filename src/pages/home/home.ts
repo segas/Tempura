@@ -9,6 +9,7 @@ import 'rxjs/add/operator/map';
 })
 export class HomePage {
   public worktimes = [];
+  public othertimes = [];
   constructor(public navCtrl: NavController, public http: Http) {
   }
 
@@ -18,7 +19,8 @@ export class HomePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MainPage');
     this.getLast5Days("2017-05-14","2017-05-18");
-    console.log(this.worktimes);
+    this.listOtherTimes();
+    //console.log(this.worktimes);
   }
 
   // Perform the login action when the user submits the login form
@@ -39,11 +41,23 @@ export class HomePage {
     this.http.post('http://88.84.20.245/tempura/php/get_worktime.php',userLogin,headers)
       .map(res => res.json())
       .subscribe(res => {
-        this.worktimes = res.worktime
+        this.worktimes = res.worktime;
         console.log("success " + JSON.stringify(this.worktimes));
       }, (err) => {
         console.log("listLast5Days() failed");
       });
+  }
+  listOtherTimes(){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.http.post('http://88.84.20.245/tempura/php/get_othertime.php',null,headers)
+        .map(res => res.json())
+        .subscribe(res => {
+          this.othertimes = res.othertime;
+          console.log("success " + JSON.stringify(this.othertimes));
+        }, (err) => {
+          console.log("listOtherTimes() failed");
+        });
   }
 
 }
