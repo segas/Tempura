@@ -6,6 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { NewTimePage } from '../pages/new-time/new-time';
+import { NewNonbuisnesstimePage } from '../pages/new-nonbuisnesstime/new-nonbuisnesstime';
 
 @Component({
   templateUrl: 'app.html'
@@ -23,7 +24,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Zeiterfassung', component: HomePage },
-      { title: 'Neue Zeiterfassung', component: NewTimePage}
+      { title: 'Neue Zeiterfassung', component: NewTimePage},
+      { title: 'Neue Spezialerfassung', component: NewNonbuisnesstimePage}
       //{ title: 'Login', component: LoginPage }
     ];
 

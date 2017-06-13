@@ -27,7 +27,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		2: 0
+/******/ 		3: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -46925,10 +46925,9 @@ HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar hideBackButton="true">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Tempura</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h3>Zeiterfassung</h3>\n\n  <ion-item type="item-text-wrap" >\n    <div class="row" >\n      <div class="col col-10">Datum</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Pause</div>\n      <div class="col col-15">Ruhetag</div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\'  *ngFor="let day of worktimes">\n      <div class="col col-10">{{day.date}}</div>\n      <div class="col col-15">{{day.timeamfrom}}</div>\n      <div class="col col-15">{{day.timeamto}}</div>\n      <div class="col col-15">{{day.timepmfrom}}</div>\n      <div class="col col-15">{{day.timepmto}}</div>\n      <div class="col col-15">{{day.pause}}</div>\n      <div class="col col-15">{{day.restday}}</div>\n    </div>\n  </ion-item>\n  <h3>Andere Einträge</h3>\n  <ion-item type="item-text-wrap">\n    <div class="row">\n      <div class="col col-10">Art</div>\n      <div class="col col-15">Datum von</div>\n      <div class="col col-15">Datum bis</div>\n      <div class="col col-15">halber Tag</div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\' *ngFor="let day of othertimes">\n      <div class="col col-10">{{day.type}}</div>\n      <div class="col col-15">{{day.datefrom}}</div>\n      <div class="col col-15">{{day.dateto}}</div>\n      <div class="col col-15">{{day.halfaday}}</div>\n    </div>\n  </ion-item>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]])
 ], HomePage);
 
-var _a, _b;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
@@ -57989,6 +57988,7 @@ LoginPage = __decorate([
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(39);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(96);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(48);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewTimePage; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -57999,6 +57999,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -58014,13 +58015,17 @@ var NewTimePage = (function () {
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.http = http;
-        this.newTime = {};
+        this.newTime = { id_user: null };
     }
     NewTimePage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad NewTimePage');
+        var account = window.sessionStorage.getItem('account');
+        account = JSON.parse(account);
+        console.log();
     };
     NewTimePage.prototype.createNewTime = function () {
-        //this.newTime.id_user = '0';
+        var _this = this;
+        this.newTime.id_user = '0';
         console.log(this.newTime);
         var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Headers */]();
         //console.log(JSON.parse(this.newTime));
@@ -58029,6 +58034,8 @@ var NewTimePage = (function () {
             .map(function (res) { return res.json(); })
             .subscribe(function (res) {
             console.log("success");
+            window.alert("Eintrag erfasst");
+            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__home_home__["a" /* HomePage */]);
         }, function (err) {
             console.log("createNewTime() doesn't working");
             console.log(err.toString());
@@ -76634,11 +76641,15 @@ module.exports = g;
 var map = {
 	"../pages/login/login.module": [
 		264,
-		1
+		2
 	],
-	"../pages/new-time/new-time.module": [
+	"../pages/new-nonbuisnesstime/new-nonbuisnesstime.module": [
 		265,
 		0
+	],
+	"../pages/new-time/new-time.module": [
+		266,
+		1
 	]
 };
 function webpackAsyncContext(req) {
@@ -76668,8 +76679,9 @@ webpackAsyncContext.id = 197;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_home_home__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_login_login__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_new_time_new_time__ = __webpack_require__(102);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__ = __webpack_require__(107);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__ = __webpack_require__(106);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_new_nonbuisnesstime_new_nonbuisnesstime__ = __webpack_require__(267);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__ = __webpack_require__(107);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__ = __webpack_require__(106);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -76677,6 +76689,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
 
 
 
@@ -76698,7 +76711,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */],
             __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */],
             __WEBPACK_IMPORTED_MODULE_6__pages_login_login__["a" /* LoginPage */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_new_time_new_time__["a" /* NewTimePage */]
+            __WEBPACK_IMPORTED_MODULE_7__pages_new_time_new_time__["a" /* NewTimePage */],
+            __WEBPACK_IMPORTED_MODULE_8__pages_new_nonbuisnesstime_new_nonbuisnesstime__["a" /* NewNonbuisnesstimePage */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -76706,7 +76720,8 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["a" /* IonicModule */].forRoot(__WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */], {}, {
                 links: [
                     { loadChildren: '../pages/login/login.module#LoginPageModule', name: 'LoginPage', segment: 'login', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/new-time/new-time.module#NewTimePageModule', name: 'NewTimePage', segment: 'new-time', priority: 'low', defaultHistory: [] }
+                    { loadChildren: '../pages/new-time/new-time.module#NewTimePageModule', name: 'NewTimePage', segment: 'new-time', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/new-nonbuisnesstime/new-nonbuisnesstime.module#NewNonbuisnesstimePageModule', name: 'NewNonbuisnesstimePage', segment: 'new-nonbuisnesstime', priority: 'low', defaultHistory: [] }
                 ]
             }),
         ],
@@ -76715,11 +76730,12 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_4__app_component__["a" /* MyApp */],
             __WEBPACK_IMPORTED_MODULE_5__pages_home_home__["a" /* HomePage */],
             __WEBPACK_IMPORTED_MODULE_6__pages_login_login__["a" /* LoginPage */],
-            __WEBPACK_IMPORTED_MODULE_7__pages_new_time_new_time__["a" /* NewTimePage */]
+            __WEBPACK_IMPORTED_MODULE_7__pages_new_time_new_time__["a" /* NewTimePage */],
+            __WEBPACK_IMPORTED_MODULE_8__pages_new_nonbuisnesstime_new_nonbuisnesstime__["a" /* NewNonbuisnesstimePage */]
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_8__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_9__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_9__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_10__ionic_native_splash_screen__["a" /* SplashScreen */],
             { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] }
         ]
     })
@@ -76925,6 +76941,7 @@ var platformBrowserDynamic = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__pages_home_home__ = __webpack_require__(48);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__pages_login_login__ = __webpack_require__(101);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__pages_new_time_new_time__ = __webpack_require__(102);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_new_nonbuisnesstime_new_nonbuisnesstime__ = __webpack_require__(267);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -76942,6 +76959,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var MyApp = (function () {
     function MyApp(platform, statusBar, splashScreen) {
         this.platform = platform;
@@ -76952,7 +76970,8 @@ var MyApp = (function () {
         // used for an example of ngFor and navigation
         this.pages = [
             { title: 'Zeiterfassung', component: __WEBPACK_IMPORTED_MODULE_4__pages_home_home__["a" /* HomePage */] },
-            { title: 'Neue Zeiterfassung', component: __WEBPACK_IMPORTED_MODULE_6__pages_new_time_new_time__["a" /* NewTimePage */] }
+            { title: 'Neue Zeiterfassung', component: __WEBPACK_IMPORTED_MODULE_6__pages_new_time_new_time__["a" /* NewTimePage */] },
+            { title: 'Neue Spezialerfassung', component: __WEBPACK_IMPORTED_MODULE_7__pages_new_nonbuisnesstime_new_nonbuisnesstime__["a" /* NewNonbuisnesstimePage */] }
             //{ title: 'Login', component: LoginPage }
         ];
     }
@@ -76974,14 +76993,15 @@ var MyApp = (function () {
 }());
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]) === "function" && _a || Object)
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/app/app.html"*/'<ion-menu id="normal_menu" [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/app/app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object])
 ], MyApp);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
@@ -114246,6 +114266,105 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
 //# sourceMappingURL=main.js.map
+
+/***/ }),
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(39);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(48);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return NewNonbuisnesstimePage; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ * Generated class for the NewNonbuisnesstimePage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+var NewNonbuisnesstimePage = (function () {
+    function NewNonbuisnesstimePage(navCtrl, navParams, http) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.http = http;
+        this.newTime = { id_user: null, type: 'Ferien', datefrom: this.getDate(), dateto: this.getDate(), halfaday: 0 };
+    }
+    NewNonbuisnesstimePage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad NewNonbuisnesstimePage');
+        console.log(this.getDate());
+    };
+    NewNonbuisnesstimePage.prototype.createNonBuisnessTime = function () {
+        var _this = this;
+        this.newTime.id_user = '0';
+        console.log(this.newTime);
+        var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Headers */]();
+        //console.log(JSON.parse(this.newTime));
+        headers.append('Content-Type', 'application/json');
+        this.http.post('http://88.84.20.245/tempura/php/create_othertime.php', this.newTime, headers)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (res) {
+            console.log("success");
+            window.alert("Eintrag erfasst");
+            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__home_home__["a" /* HomePage */]);
+        }, function (err) {
+            console.log("createNewTime() doesn't working");
+            console.log(err.toString());
+        });
+    };
+    NewNonbuisnesstimePage.prototype.getDate = function () {
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var dd1;
+        var mm1;
+        var yyyy = today.getFullYear();
+        if (dd < 10) {
+            dd1 = '0' + dd;
+        }
+        else {
+            dd1 = dd;
+        }
+        if (mm < 10) {
+            mm1 = '0' + mm;
+        }
+        else {
+            mm1 = mm;
+        }
+        var today1 = yyyy + "-" + mm1 + "-" + dd1;
+        return today1;
+    };
+    return NewNonbuisnesstimePage;
+}());
+NewNonbuisnesstimePage = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
+        selector: 'page-new-nonbuisnesstime',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/new-nonbuisnesstime/new-nonbuisnesstime.html"*/'<!--\n  Generated template for the NewTimePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Neue Spezialerfassung</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <form (ngSubmit)="createNonBuisnessTime()" #registerForm="ngForm">\n    <ion-list>\n      <ion-item>\n        <ion-select [(ngModel)]="newTime.type" name="type" placeholder="Art">\n          <ion-option value="Ferien">Ferien</ion-option>\n          <ion-option value="Unfall">Unfall</ion-option>\n          <ion-option value="Krankheit">Krankheit</ion-option>\n          <ion-option value="Militaer">Militär</ion-option>\n          <ion-option value="Schwangerschaft">Schwangerschaft</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Datum Von:</ion-label>\n        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.datefrom" name="datefrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Datum Bis:</ion-label>\n        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.dateto" name="dateto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-select [(ngModel)]="newTime.halfaday" name="halfaday" placeholder="Nein">\n          <ion-option value="1">Ja</ion-option>\n          <ion-option value="0">Nein</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n    <ion-item>\n      <button ion-button type="submit">Speichern</button>\n    </ion-item>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/new-nonbuisnesstime/new-nonbuisnesstime.html"*/,
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === "function" && _c || Object])
+], NewNonbuisnesstimePage);
+
+var _a, _b, _c;
+//# sourceMappingURL=new-nonbuisnesstime.js.map
 
 /***/ })
 /******/ ]);
