@@ -1,14 +1,14 @@
 webpackJsonp([0],{
 
-/***/ 265:
+/***/ 271:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(31);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__new_nonbuisnesstime__ = __webpack_require__(267);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NewNonbuisnesstimePageModule", function() { return NewNonbuisnesstimePageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__personal__ = __webpack_require__(105);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PersonalPageModule", function() { return PersonalPageModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,26 +18,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var NewNonbuisnesstimePageModule = (function () {
-    function NewNonbuisnesstimePageModule() {
+var PersonalPageModule = (function () {
+    function PersonalPageModule() {
     }
-    return NewNonbuisnesstimePageModule;
+    return PersonalPageModule;
 }());
-NewNonbuisnesstimePageModule = __decorate([
+PersonalPageModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["a" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__new_nonbuisnesstime__["a" /* NewNonbuisnesstimePage */],
+            __WEBPACK_IMPORTED_MODULE_2__personal__["a" /* PersonalPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__new_nonbuisnesstime__["a" /* NewNonbuisnesstimePage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__personal__["a" /* PersonalPage */]),
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__new_nonbuisnesstime__["a" /* NewNonbuisnesstimePage */]
+            __WEBPACK_IMPORTED_MODULE_2__personal__["a" /* PersonalPage */]
         ]
     })
-], NewNonbuisnesstimePageModule);
+], PersonalPageModule);
 
-//# sourceMappingURL=new-nonbuisnesstime.module.js.map
+//# sourceMappingURL=personal.module.js.map
 
 /***/ })
 

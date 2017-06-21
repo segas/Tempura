@@ -6,6 +6,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { NewTimePage } from '../pages/new-time/new-time';
+import { HolidayPage } from '../pages/holiday/holiday';
+import { PersonalPage } from '../pages/personal/personal';
 import { NewNonbuisnesstimePage } from '../pages/new-nonbuisnesstime/new-nonbuisnesstime';
 
 @Component({
@@ -25,8 +27,9 @@ export class MyApp {
     this.pages = [
       { title: 'Zeiterfassung', component: HomePage },
       { title: 'Neue Zeiterfassung', component: NewTimePage},
-      { title: 'Neue Spezialerfassung', component: NewNonbuisnesstimePage}
-      //{ title: 'Login', component: LoginPage }
+      { title: 'Neue Spezialerfassung', component: NewNonbuisnesstimePage},
+      { title: 'Ferien', component: HolidayPage},
+      { title: 'Personaleinstellungen', component: PersonalPage }
     ];
 
   }
