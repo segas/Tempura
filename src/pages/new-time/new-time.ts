@@ -17,7 +17,7 @@ import { HomePage } from '../home/home';
 })
 export class NewTimePage {
 
-  newTime = {id_user: null};
+  newTime = {id_user: null, date: this.getDate(), timeamfrom: this.getTime(), timeamto: this.getTime(), timepmfrom: this.getTime(), timepmto: this.getTime(), pause: 0, restday: 0};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
   }
@@ -26,7 +26,9 @@ export class NewTimePage {
     console.log('ionViewDidLoad NewTimePage');
     var account = window.sessionStorage.getItem('account');
     account = JSON.parse(account);
-    console.log()
+    var d = new Date;
+
+    console.log(d.getHours())
   }
 
   createNewTime(){
@@ -46,4 +48,34 @@ export class NewTimePage {
           console.log(err.toString());
         });
   }
+
+    getDate(){
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var dd1;
+        var mm1;
+
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd1='0'+dd;
+        }else{
+            dd1 = dd;
+        }
+        if(mm<10){
+            mm1='0'+mm;
+        }else {
+            mm1 = mm;
+        }
+        var today1 = yyyy+"-"+mm1+"-"+dd1;
+        return today1;
+    }
+    getTime(){
+        var now = new Date();
+        var hh = now.getHours();
+        var mm = now.getMinutes();
+        var ss = "00";
+        var now1 = hh+":"+mm+":"+ss;
+        return now1;
+    }
 }
