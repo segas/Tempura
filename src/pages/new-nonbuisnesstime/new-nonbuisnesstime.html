@@ -27,11 +27,11 @@
       </ion-item>
       <ion-item>
         <ion-label>Datum Von:</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.datefrom" name="datefrom"></ion-datetime>
+        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.datefrom" max="2020" name="datefrom"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>Datum Bis:</ion-label>
-        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.dateto" name="dateto"></ion-datetime>
+        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.dateto" max="2020" name="dateto"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label>Halbtags:</ion-label>

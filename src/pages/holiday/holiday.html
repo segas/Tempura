@@ -17,7 +17,7 @@
   <h3>Ferien</h3>
   <ion-item>
     <ion-label>Date</ion-label>
-    <ion-datetime displayFormat="MMMM/YYYY" [(ngModel)]="myDate"></ion-datetime>
+    <ion-datetime displayFormat="MMMM-YYYY" [(ngModel)]="month" max="2020" (ngModelChange)="loadMonth()"></ion-datetime>
   </ion-item>
   <ion-item type="item-text-wrap">
     <div class="row">

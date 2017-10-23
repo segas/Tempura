@@ -37965,10 +37965,9 @@ HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
         selector: 'page-home',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar hideBackButton="true">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Tempura</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h3>Zeiterfassung</h3>\n\n  <ion-item type="item-text-wrap" >\n    <div class="row" >\n      <div class="col col-10">Datum</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Pause</div>\n      <div class="col col-15">Ruhetag</div>\n      <div class="col col-15">Arbeitszeit</div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\'  *ngFor="let day of worktimes">\n      <div class="col col-10">{{day.date}}</div>\n      <div class="col col-15">{{day.timeamfrom}}</div>\n      <div class="col col-15">{{day.timeamto}}</div>\n      <div class="col col-15">{{day.timepmfrom}}</div>\n      <div class="col col-15">{{day.timepmto}}</div>\n      <div class="col col-15">{{day.pause}}</div>\n      <div class="col col-15">{{day.restday}}</div>\n      <div class="col col-15">{{day.worktime}}</div>\n    </div>\n  </ion-item>\n  <h3>Andere Einträge</h3>\n  <ion-item type="item-text-wrap">\n    <div class="row">\n      <div class="col col-10">Art</div>\n      <div class="col col-15">Datum von</div>\n      <div class="col col-15">Datum bis</div>\n      <div class="col col-15">halber Tag</div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\' *ngFor="let day of othertimes">\n      <div class="col col-10">{{day.type}}</div>\n      <div class="col col-15">{{day.datefrom}}</div>\n      <div class="col col-15">{{day.dateto}}</div>\n      <div class="col col-15">{{day.halfaday}}</div>\n    </div>\n  </ion-item>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === "function" && _b || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]])
 ], HomePage);
 
-var _a, _b;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
@@ -57998,16 +57997,20 @@ var HolidayPage = (function () {
         this.navParams = navParams;
         this.http = http;
         this.holidays = [];
+        this.month = null;
+        this.account = { id_user: 0 };
     }
     HolidayPage.prototype.ionViewDidLoad = function () {
         console.log('ionViewDidLoad HolidayPage');
-        this.listHolidays();
+        var data = { id_user: this.account.id_user, date: this.getMonth() };
+        this.listHolidays(data);
+        console.log(data);
     };
-    HolidayPage.prototype.listHolidays = function () {
+    HolidayPage.prototype.listHolidays = function (month) {
         var _this = this;
         var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Headers */]();
         headers.append('Content-Type', 'application/json');
-        this.http.post('http://88.84.20.245/tempura/php/get_holiday.php', null, headers)
+        this.http.post('http://88.84.20.245/tempura/php/get_holiday.php', month, headers)
             .map(function (res) { return res.json(); })
             .subscribe(function (res) {
             _this.holidays = res.othertime;
@@ -58016,16 +58019,36 @@ var HolidayPage = (function () {
             console.log("listOtherTimes() failed");
         });
     };
+    HolidayPage.prototype.loadMonth = function () {
+        var data = { id_user: this.account.id_user, date: this.month };
+        console.log(data);
+        this.listHolidays(data);
+    };
+    HolidayPage.prototype.getMonth = function () {
+        var today = new Date();
+        var mm = today.getMonth() + 1; //January is 0!
+        var mm1;
+        var yyyy = today.getFullYear();
+        if (mm < 10) {
+            mm1 = '0' + mm;
+        }
+        else {
+            mm1 = mm;
+        }
+        var today1 = yyyy + "-" + mm1;
+        return today1;
+    };
     return HolidayPage;
 }());
 HolidayPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-holiday',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/holiday/holiday.html"*/'<!--\n  Generated template for the HolidayPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Ferien</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h3>Ferien</h3>\n  <ion-item>\n    <ion-label>Date</ion-label>\n    <ion-datetime displayFormat="MMMM/YYYY" [(ngModel)]="myDate"></ion-datetime>\n  </ion-item>\n  <ion-item type="item-text-wrap">\n    <div class="row">\n      <div class="col col-15">Datum von</div>\n      <div class="col col-15">Datum bis</div>\n      <div class="col col-15">halber Tag</div>\n    </div>\n    <div class="row" ng-controller=\'HolidayPage\' *ngFor="let day of holidays">\n      <div class="col col-15">{{day.datefrom}}</div>\n      <div class="col col-15">{{day.dateto}}</div>\n      <div class="col col-15">{{day.halfaday}}</div>\n    </div>\n  </ion-item>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/holiday/holiday.html"*/,
+        selector: 'page-holiday',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/holiday/holiday.html"*/'<!--\n  Generated template for the HolidayPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Ferien</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <h3>Ferien</h3>\n  <ion-item>\n    <ion-label>Date</ion-label>\n    <ion-datetime displayFormat="MMMM-YYYY" [(ngModel)]="month" max="2020" (ngModelChange)="loadMonth()"></ion-datetime>\n  </ion-item>\n  <ion-item type="item-text-wrap">\n    <div class="row">\n      <div class="col col-15">Datum von</div>\n      <div class="col col-15">Datum bis</div>\n      <div class="col col-15">halber Tag</div>\n    </div>\n    <div class="row" ng-controller=\'HolidayPage\' *ngFor="let day of holidays">\n      <div class="col col-15">{{day.datefrom}}</div>\n      <div class="col col-15">{{day.dateto}}</div>\n      <div class="col col-15">{{day.halfaday}}</div>\n    </div>\n  </ion-item>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/holiday/holiday.html"*/,
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === "function" && _c || Object])
 ], HolidayPage);
 
+var _a, _b, _c;
 //# sourceMappingURL=holiday.js.map
 
 /***/ }),
@@ -58209,7 +58232,7 @@ var NewNonbuisnesstimePage = (function () {
 NewNonbuisnesstimePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-new-nonbuisnesstime',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/new-nonbuisnesstime/new-nonbuisnesstime.html"*/'<!--\n  Generated template for the NewTimePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Neue Spezialerfassung</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <form (ngSubmit)="createNonBuisnessTime()" #registerForm="ngForm">\n    <ion-list>\n      <ion-item>\n        <ion-select [(ngModel)]="newTime.type" name="type" placeholder="Art">\n          <ion-option value="Ferien">Ferien</ion-option>\n          <ion-option value="Unfall">Unfall</ion-option>\n          <ion-option value="Krankheit">Krankheit</ion-option>\n          <ion-option value="Militaer">Militär</ion-option>\n          <ion-option value="Schwangerschaft">Schwangerschaft</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Datum Von:</ion-label>\n        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.datefrom" name="datefrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Datum Bis:</ion-label>\n        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.dateto" name="dateto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Halbtags:</ion-label>\n        <ion-select [(ngModel)]="newTime.halfaday" name="halfaday" placeholder="Nein">\n          <ion-option value="1">Ja</ion-option>\n          <ion-option value="0">Nein</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n    <ion-item>\n      <button ion-button type="submit">Speichern</button>\n    </ion-item>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/new-nonbuisnesstime/new-nonbuisnesstime.html"*/,
+        selector: 'page-new-nonbuisnesstime',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/new-nonbuisnesstime/new-nonbuisnesstime.html"*/'<!--\n  Generated template for the NewTimePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Neue Spezialerfassung</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <form (ngSubmit)="createNonBuisnessTime()" #registerForm="ngForm">\n    <ion-list>\n      <ion-item>\n        <ion-select [(ngModel)]="newTime.type" name="type" placeholder="Art">\n          <ion-option value="Ferien">Ferien</ion-option>\n          <ion-option value="Unfall">Unfall</ion-option>\n          <ion-option value="Krankheit">Krankheit</ion-option>\n          <ion-option value="Militaer">Militär</ion-option>\n          <ion-option value="Schwangerschaft">Schwangerschaft</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Datum Von:</ion-label>\n        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.datefrom" max="2020" name="datefrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Datum Bis:</ion-label>\n        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.dateto" max="2020" name="dateto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Halbtags:</ion-label>\n        <ion-select [(ngModel)]="newTime.halfaday" name="halfaday" placeholder="Nein">\n          <ion-option value="1">Ja</ion-option>\n          <ion-option value="0">Nein</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n    <ion-item>\n      <button ion-button type="submit">Speichern</button>\n    </ion-item>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/new-nonbuisnesstime/new-nonbuisnesstime.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]])
 ], NewNonbuisnesstimePage);
@@ -58317,10 +58340,9 @@ NewTimePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
         selector: 'page-new-time',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/new-time/new-time.html"*/'<!--\n  Generated template for the NewTimePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Neue Zeiterfassung</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <form (ngSubmit)="createNewTime()" #registerForm="ngForm">\n    <ion-list>\n      <!--<ion-item>\n        <ion-select [(ngModel)]="newTime.type" name="type" placeholder="Art">\n          <ion-option value="work">Arbeit</ion-option>\n          <ion-option value="accident">Unfall</ion-option>\n          <ion-option value="illness">Krankheit</ion-option>\n          <ion-option value="military">Militär</ion-option>\n          <ion-option value="pregnancy">Schwangerschaft</ion-option>\n        </ion-select>\n      </ion-item>-->\n      <ion-item>\n        <ion-label>Datum:</ion-label>\n        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.date" name="date"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Von:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timeamfrom" name="timeamfrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Bis:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timeamto" name="timeamto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Von:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timepmfrom" name="timepmfrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Bis:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timepmto" name="timepmto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Pause:</ion-label>\n        <ion-select placeholder="Pause" [(ngModel)]="newTime.pause" name="pause">\n          <ion-option value="0">0 Minuten</ion-option>\n          <ion-option value="15">15 Minuten</ion-option>\n          <ion-option value="30">30 Minuten</ion-option>\n          <ion-option value="45">45 Minuten</ion-option>\n          <ion-option value="60">1 Stunde</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Ruhetage:</ion-label>\n        <ion-select placeholder="Ruhetag" [(ngModel)]="newTime.restday" name="restday">\n          <ion-option value="0">0 Tage</ion-option>\n          <ion-option value="50">0.5 Tage</ion-option>\n          <ion-option value="100">1 Tag</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n    <ion-item>\n      <button ion-button type="submit">Speichern</button>\n    </ion-item>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/new-time/new-time.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]])
 ], NewTimePage);
 
-var _a, _b, _c;
 //# sourceMappingURL=new-time.js.map
 
 /***/ }),
