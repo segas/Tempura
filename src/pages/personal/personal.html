@@ -16,7 +16,7 @@
 <ion-content padding>
   <ion-item>
     <ion-label>Arbeiter:</ion-label>
-    <ion-select name="username"> <!--[(ngModel)]="loginData.username"-->
+    <ion-select name="username" [(ngModel)]="username" (ngModelChange)="showUser()">
       <ion-option *ngFor="let item of users">{{item}}</ion-option>
     </ion-select>
   </ion-item>
@@ -24,31 +24,51 @@
     <ion-list>
       <ion-item>
         <ion-label color="primary">Name</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="user.lastname" name="name"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary">Vorname</ion-label>
-        <ion-input></ion-input>
+        <ion-input [(ngModel)]="user.firstname" name="firstname"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="primary">Funktion</ion-label>
-        <ion-input></ion-input>
+        <ion-label color="primary">Username</ion-label>
+        <ion-input [(ngModel)]="user.username" name="username"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary">Passwort</ion-label>
-        <ion-input  type="password"></ion-input>
+        <ion-input [(ngModel)]="user.password" name="password" type="password"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary">Passwort bestätigen</ion-label>
         <ion-input  type="password"></ion-input>
       </ion-item>
       <ion-item>
-        <ion-label color="primary">Stunden pro Woche</ion-label>
-        <ion-input type="number"></ion-input>
+        <ion-label color="primary">Funktion</ion-label>
+        <ion-input [(ngModel)]="user.function" name="function"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Stundenziel</ion-label>
+        <ion-input [(ngModel)]="user.target_hours" name="target_hours"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Admin</ion-label>
+        <ion-input [(ngModel)]="user.admin" name="admin"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Ferientage</ion-label>
+        <ion-input [(ngModel)]="user.holiday_days" name="holiday_days"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Stunden pro Tag</ion-label>
+        <ion-input [(ngModel)]="user.hours_per_day" name="hoursperweek" type="number"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label color="primary">Stunden pro Monat</ion-label>
-        <ion-input type="number"></ion-input>
+        <ion-input [(ngModel)]="user.hours_per_month" name="hourspermonth" type="number"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label color="primary">Aktiv</ion-label>
+        <ion-input [(ngModel)]="user.active" name="active" type="number"></ion-input>
       </ion-item>
     </ion-list>
     <ion-item>

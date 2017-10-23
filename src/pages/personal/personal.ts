@@ -17,7 +17,11 @@ import { HomePage } from '../home/home';
 })
 export class PersonalPage {
   public users = [];
+  public user = {};
   public newUser = {};
+  account = {id_user:0};
+
+  username = null;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
   }
 
@@ -54,6 +58,19 @@ export class PersonalPage {
           console.log("createUser() doesn't working");
           console.log(err.toString());
         });
+  }
+  showUser(){
+      var data = {id_user:this.account.id_user};
+      let headers = new Headers();
+      headers.append('Content-Type', 'application/json');
+      this.http.post('http://88.84.20.245/tempura/php/get_user.php',data,headers)
+          .map(res => res.json())
+          .subscribe(res => {
+              console.log("success "+JSON.stringify(res.user));
+              this.user = res.user;
+          }, (err) => {
+              console.log("get_user() doesn't working");
+          });
   }
 
 }
