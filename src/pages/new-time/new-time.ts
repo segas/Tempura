@@ -16,7 +16,7 @@ import { HomePage } from '../home/home';
   templateUrl: 'new-time.html',
 })
 export class NewTimePage {
-
+  public account = {id_user:0};
   newTime = {id_user: null, date: this.getDate(), timeamfrom: this.getTime(), timeamto: this.getTime(), timepmfrom: this.getTime(), timepmto: this.getTime(), pause: 0, restday: 0};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
@@ -25,14 +25,16 @@ export class NewTimePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewTimePage');
     var account = window.sessionStorage.getItem('account');
-    account = JSON.parse(account);
+    //console.log(datestart);
+    this.account = JSON.parse(account);
+    console.log(this.account);
     var d = new Date;
 
     console.log(d.getHours())
   }
 
   createNewTime(){
-    this.newTime.id_user = '0';
+    this.newTime.id_user = this.account.id_user;
     console.log(this.newTime);
     let headers = new Headers();
     //console.log(JSON.parse(this.newTime));

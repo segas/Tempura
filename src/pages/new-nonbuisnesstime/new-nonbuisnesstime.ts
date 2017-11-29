@@ -16,7 +16,7 @@ import { HomePage } from '../home/home';
   templateUrl: 'new-nonbuisnesstime.html',
 })
 export class NewNonbuisnesstimePage {
-
+  public account = {id_user:0};
   newTime = {id_user: null, type: 'Ferien', datefrom: this.getDate(), dateto: this.getDate(), halfaday: 0};
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
@@ -25,11 +25,16 @@ export class NewNonbuisnesstimePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad NewNonbuisnesstimePage');
 
+    var account = window.sessionStorage.getItem('account');
+    //console.log(datestart);
+    this.account = JSON.parse(account);
+    console.log(this.account);
+
     console.log(this.getDate());
   }
 
   createNonBuisnessTime(){
-    this.newTime.id_user = '0';
+    this.newTime.id_user = this.account.id_user;
     console.log(this.newTime);
     let headers = new Headers();
     //console.log(JSON.parse(this.newTime));
