@@ -19,7 +19,6 @@ export class PersonalPage {
   public users = [];
   public user = {};
   public newUser = {};
-  account = {id_user:0};
 
   username = null;
   constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http) {
@@ -52,22 +51,38 @@ export class PersonalPage {
         .map(res => res.json())
         .subscribe(res => {
           console.log("success");
-          window.alert("Eintrag erfasst");
+          window.alert("User erstellt");
           this.navCtrl.setRoot(HomePage);
         }, (err) => {
           console.log("createUser() doesn't working");
           console.log(err.toString());
         });
   }
+  changeUser(){
+    console.log(this.user);
+    let headers = new Headers();
+    //console.log(JSON.parse(this.newTime));
+    headers.append('Content-Type', 'application/json');
+    this.http.post('http://88.84.20.245/tempura/php/change_user.php', this.user,headers)
+        .map(res => res.json())
+        .subscribe(res => {
+          console.log("success");
+          window.alert("Eintrag erfasst");
+          this.navCtrl.setRoot(HomePage);
+        }, (err) => {
+          console.log("changeUser() doesn't working");
+          console.log(err.toString());
+        });
+  }
   showUser(){
-      var data = {id_user:this.account.id_user};
+      var data = {username: this.username};
       let headers = new Headers();
       headers.append('Content-Type', 'application/json');
       this.http.post('http://88.84.20.245/tempura/php/get_user.php',data,headers)
           .map(res => res.json())
           .subscribe(res => {
-              console.log("success "+JSON.stringify(res.user));
-              this.user = res.user;
+              console.log("success "+JSON.stringify(res.user[0]));
+              this.user = res.user[0];
           }, (err) => {
               console.log("get_user() doesn't working");
           });

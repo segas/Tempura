@@ -27,7 +27,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		5: 0
+/******/ 		6: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -58382,7 +58382,6 @@ var PersonalPage = (function () {
         this.users = [];
         this.user = {};
         this.newUser = {};
-        this.account = { id_user: 0 };
         this.username = null;
     }
     PersonalPage.prototype.ionViewDidLoad = function () {
@@ -58412,23 +58411,40 @@ var PersonalPage = (function () {
             .map(function (res) { return res.json(); })
             .subscribe(function (res) {
             console.log("success");
-            window.alert("Eintrag erfasst");
+            window.alert("User erstellt");
             _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__home_home__["a" /* HomePage */]);
         }, function (err) {
             console.log("createUser() doesn't working");
             console.log(err.toString());
         });
     };
+    PersonalPage.prototype.changeUser = function () {
+        var _this = this;
+        console.log(this.user);
+        var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Headers */]();
+        //console.log(JSON.parse(this.newTime));
+        headers.append('Content-Type', 'application/json');
+        this.http.post('http://88.84.20.245/tempura/php/change_user.php', this.user, headers)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (res) {
+            console.log("success");
+            window.alert("Eintrag erfasst");
+            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__home_home__["a" /* HomePage */]);
+        }, function (err) {
+            console.log("changeUser() doesn't working");
+            console.log(err.toString());
+        });
+    };
     PersonalPage.prototype.showUser = function () {
         var _this = this;
-        var data = { id_user: this.account.id_user };
+        var data = { username: this.username };
         var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Headers */]();
         headers.append('Content-Type', 'application/json');
         this.http.post('http://88.84.20.245/tempura/php/get_user.php', data, headers)
             .map(function (res) { return res.json(); })
             .subscribe(function (res) {
-            console.log("success " + JSON.stringify(res.user));
-            _this.user = res.user;
+            console.log("success " + JSON.stringify(res.user[0]));
+            _this.user = res.user[0];
         }, function (err) {
             console.log("get_user() doesn't working");
         });
@@ -58438,12 +58454,11 @@ var PersonalPage = (function () {
 PersonalPage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-personal',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/personal/personal.html"*/'<!--\n  Generated template for the PersonalPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Personaleinstellungen</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <ion-item>\n    <ion-label>Arbeiter:</ion-label>\n    <ion-select name="username" [(ngModel)]="username" (ngModelChange)="showUser()">\n      <ion-option *ngFor="let item of users">{{item}}</ion-option>\n    </ion-select>\n  </ion-item>\n  <form (ngSubmit)="createUser()" #registerForm="ngForm">\n    <ion-list>\n      <ion-item>\n        <ion-label color="primary">Name</ion-label>\n        <ion-input [(ngModel)]="user.lastname" name="name"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Vorname</ion-label>\n        <ion-input [(ngModel)]="user.firstname" name="firstname"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Username</ion-label>\n        <ion-input [(ngModel)]="user.username" name="username"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Passwort</ion-label>\n        <ion-input [(ngModel)]="user.password" name="password" type="password"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Passwort bestätigen</ion-label>\n        <ion-input  type="password"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Funktion</ion-label>\n        <ion-input [(ngModel)]="user.function" name="function"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Stundenziel</ion-label>\n        <ion-input [(ngModel)]="user.target_hours" name="target_hours"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Admin</ion-label>\n        <ion-input [(ngModel)]="user.admin" name="admin"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Ferientage</ion-label>\n        <ion-input [(ngModel)]="user.holiday_days" name="holiday_days"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Stunden pro Tag</ion-label>\n        <ion-input [(ngModel)]="user.hours_per_day" name="hoursperweek" type="number"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Stunden pro Monat</ion-label>\n        <ion-input [(ngModel)]="user.hours_per_month" name="hourspermonth" type="number"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Aktiv</ion-label>\n        <ion-input [(ngModel)]="user.active" name="active" type="number"></ion-input>\n      </ion-item>\n    </ion-list>\n    <ion-item>\n      <button ion-button type="submit">Speichern</button>\n    </ion-item>\n  </form>\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/personal/personal.html"*/,
+        selector: 'page-personal',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/personal/personal.html"*/'<!--\n  Generated template for the PersonalPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n  <ion-navbar>\n    <ion-title>Personaleinstellungen</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h2>Benutzer bearbeiten</h2>\n  <ion-item>\n    <ion-label>Arbeiter:</ion-label>\n    <ion-select name="username" [(ngModel)]="username" (ngModelChange)="showUser()">\n      <ion-option *ngFor="let item of users">{{item}}</ion-option>\n    </ion-select>\n  </ion-item>\n  <form (ngSubmit)="changeUser()" #registerForm="ngForm">\n    <ion-list>\n      <ion-item>\n        <ion-label color="primary">Name</ion-label>\n        <ion-input [(ngModel)]="user.lastname" name="name"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Vorname</ion-label>\n        <ion-input [(ngModel)]="user.firstname" name="firstname"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Username</ion-label>\n        <ion-input [(ngModel)]="user.username" name="username"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Passwort</ion-label>\n        <ion-input [(ngModel)]="user.password" name="password" type="password"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Passwort bestätigen</ion-label>\n        <ion-input  type="password"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Funktion</ion-label>\n        <ion-input [(ngModel)]="user.function" name="function"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Stundenziel</ion-label>\n        <ion-input [(ngModel)]="user.target_hours" name="target_hours"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Admin</ion-label>\n        <ion-input [(ngModel)]="user.admin" name="admin"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Ferientage</ion-label>\n        <ion-input [(ngModel)]="user.holiday_days" name="holiday_days"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Stunden pro Tag</ion-label>\n        <ion-input [(ngModel)]="user.hours_per_day" name="hoursperweek" type="number"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Stunden pro Monat</ion-label>\n        <ion-input [(ngModel)]="user.hours_per_month" name="hourspermonth" type="number"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Aktiv</ion-label>\n        <ion-input [(ngModel)]="user.active" name="active" type="number"></ion-input>\n      </ion-item>\n    </ion-list>\n    <ion-item>\n      <button ion-button type="submit">Speichern</button>\n    </ion-item>\n  </form>\n\n<h2>Neuen Benutzer erstellen</h2>\n<!-- Neuen Benutzer erstellen -->\n  <form (ngSubmit)="createUser()" #registerForm="ngForm">\n    <ion-list>\n      <ion-item>\n        <ion-label color="primary">Name</ion-label>\n        <ion-input [(ngModel)]="newUser.lastname" name="name"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Vorname</ion-label>\n        <ion-input [(ngModel)]="newUser.firstname" name="firstname"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Username</ion-label>\n        <ion-input [(ngModel)]="newUser.username" name="username"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Passwort</ion-label>\n        <ion-input [(ngModel)]="newUser.password" name="password" type="password"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Passwort bestätigen</ion-label>\n        <ion-input  type="password"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Funktion</ion-label>\n        <ion-input [(ngModel)]="newUser.function" name="function"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Stundenziel</ion-label>\n        <ion-input [(ngModel)]="newUser.target_hours" name="target_hours"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Admin</ion-label>\n        <ion-input [(ngModel)]="newUser.admin" name="admin"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Ferientage</ion-label>\n        <ion-input [(ngModel)]="newUser.holiday_days" name="holiday_days"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Stunden pro Tag</ion-label>\n        <ion-input [(ngModel)]="newUser.hours_per_day" name="hoursperweek" type="number"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Stunden pro Monat</ion-label>\n        <ion-input [(ngModel)]="newUser.hours_per_month" name="hourspermonth" type="number"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label color="primary">Aktiv</ion-label>\n        <ion-input [(ngModel)]="newUser.active" name="active" type="number"></ion-input>\n      </ion-item>\n    </ion-list>\n    <ion-item>\n      <button ion-button type="submit">Speichern</button>\n    </ion-item>\n  </form>\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/personal/personal.html"*/,
     }),
-    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === "function" && _c || Object])
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]])
 ], PersonalPage);
 
-var _a, _b, _c;
 //# sourceMappingURL=personal.js.map
 
 /***/ }),
@@ -77033,22 +77048,26 @@ module.exports = g;
 var map = {
 	"../pages/holiday/holiday.module": [
 		267,
-		4
+		5
 	],
 	"../pages/login/login.module": [
 		268,
-		3
+		4
 	],
 	"../pages/new-nonbuisnesstime/new-nonbuisnesstime.module": [
 		269,
-		2
+		3
 	],
 	"../pages/new-time/new-time.module": [
 		270,
-		1
+		2
 	],
 	"../pages/personal/personal.module": [
 		271,
+		1
+	],
+	"../pages/report/report.module": [
+		272,
 		0
 	]
 };
@@ -77129,7 +77148,8 @@ AppModule = __decorate([
                     { loadChildren: '../pages/new-time/new-time.module#NewTimePageModule', name: 'NewTimePage', segment: 'new-time', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/holiday/holiday.module#HolidayPageModule', name: 'HolidayPage', segment: 'holiday', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/personal/personal.module#PersonalPageModule', name: 'PersonalPage', segment: 'personal', priority: 'low', defaultHistory: [] },
-                    { loadChildren: '../pages/new-nonbuisnesstime/new-nonbuisnesstime.module#NewNonbuisnesstimePageModule', name: 'NewNonbuisnesstimePage', segment: 'new-nonbuisnesstime', priority: 'low', defaultHistory: [] }
+                    { loadChildren: '../pages/new-nonbuisnesstime/new-nonbuisnesstime.module#NewNonbuisnesstimePageModule', name: 'NewNonbuisnesstimePage', segment: 'new-nonbuisnesstime', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/report/report.module#ReportPageModule', name: 'ReportPage', segment: 'report', priority: 'low', defaultHistory: [] }
                 ]
             }),
         ],
