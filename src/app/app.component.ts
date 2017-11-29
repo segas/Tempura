@@ -9,6 +9,8 @@ import { NewTimePage } from '../pages/new-time/new-time';
 import { HolidayPage } from '../pages/holiday/holiday';
 import { PersonalPage } from '../pages/personal/personal';
 import { NewNonbuisnesstimePage } from '../pages/new-nonbuisnesstime/new-nonbuisnesstime';
+import { ReportPage } from '../pages/report/report';
+import { ChangeTimePage } from '../pages/change-time/change-time';
 
 @Component({
   templateUrl: 'app.html'
@@ -29,7 +31,8 @@ export class MyApp {
       { title: 'Neue Zeiterfassung', component: NewTimePage},
       { title: 'Neue Spezialerfassung', component: NewNonbuisnesstimePage},
       { title: 'Ferien', component: HolidayPage},
-      { title: 'Personaleinstellungen', component: PersonalPage }
+      { title: 'Personaleinstellungen', component: PersonalPage },
+      { title: 'Bericht', component: ReportPage}
     ];
 
   }

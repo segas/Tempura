@@ -16,15 +16,6 @@
 <ion-content padding>
   <form (ngSubmit)="createNewTime()" #registerForm="ngForm">
     <ion-list>
-      <!--<ion-item>
-        <ion-select [(ngModel)]="newTime.type" name="type" placeholder="Art">
-          <ion-option value="work">Arbeit</ion-option>
-          <ion-option value="accident">Unfall</ion-option>
-          <ion-option value="illness">Krankheit</ion-option>
-          <ion-option value="military">Militär</ion-option>
-          <ion-option value="pregnancy">Schwangerschaft</ion-option>
-        </ion-select>
-      </ion-item>-->
       <ion-item>
         <ion-label>Datum:</ion-label>
         <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.date" name="date"></ion-datetime>

@@ -27,7 +27,7 @@
 /******/
 /******/ 	// objects to store loaded and loading chunks
 /******/ 	var installedChunks = {
-/******/ 		6: 0
+/******/ 		7: 0
 /******/ 	};
 /******/
 /******/ 	// The require function
@@ -37821,6 +37821,7 @@ function BaseInput_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(50);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__change_time_change_time__ = __webpack_require__(274);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -37831,6 +37832,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -37921,9 +37923,10 @@ var HomePage = (function () {
         console.log(id_worktime);
         this.deleteRow(id_worktime);
     };
-    HomePage.prototype.change = function (id_worktime) {
+    HomePage.prototype.change = function (time) {
         console.log("change ");
-        console.log(id_worktime);
+        console.log(time);
+        this.navCtrl.push(__WEBPACK_IMPORTED_MODULE_5__change_time_change_time__["a" /* ChangeTimePage */], time);
     };
     HomePage.prototype.getDate = function () {
         var today = new Date();
@@ -37997,7 +38000,7 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar hideBackButton="true">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <table width="100%">\n      <tr>\n        <td><ion-title>Tempura</ion-title></td>\n        <td align="right"><button ion-button color="light" (click)="logout()">{{account.firstname}} {{account.lastname}} abmelden</button></td>\n      </tr>\n    </table>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h3>Zeiterfassung</h3>\n\n  <ion-item type="item-text-wrap" >\n    <div class="row" >\n      <div class="col col-10">Datum</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Pause</div>\n      <div class="col col-15">Ruhetag</div>\n      <div class="col col-15">Arbeitszeit</div>\n      <div class="col col-15"></div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\'  *ngFor="let day of worktimes">\n      <div class="col col-10">{{day.date}}</div>\n      <div class="col col-15">{{day.timeamfrom}}</div>\n      <div class="col col-15">{{day.timeamto}}</div>\n      <div class="col col-15">{{day.timepmfrom}}</div>\n      <div class="col col-15">{{day.timepmto}}</div>\n      <div class="col col-15">{{day.pause}}</div>\n      <div class="col col-15">{{day.restday}}</div>\n      <div class="col col-15">{{day.worktime}}</div>\n      <div class="col col-15"><button ion-button color="change" value="{{day.fs_user}}" (click)="change(day.id_worktime)"><ion-icon name="settings"></ion-icon></button><button ion-button color="danger" value="{{day.fs_user}}" (click)="delete(day.id_worktime)"><ion-icon name="trash"></ion-icon></button></div>\n    </div>\n  </ion-item>\n  <h3>Andere Einträge</h3>\n  <ion-item type="item-text-wrap">\n    <div class="row">\n      <div class="col col-10">Art</div>\n      <div class="col col-15">Datum von</div>\n      <div class="col col-15">Datum bis</div>\n      <div class="col col-15">halber Tag</div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\' *ngFor="let day of othertimes">\n      <div class="col col-10">{{day.type}}</div>\n      <div class="col col-15">{{day.datefrom}}</div>\n      <div class="col col-15">{{day.dateto}}</div>\n      <div class="col col-15">{{day.halfaday}}</div>\n    </div>\n  </ion-item>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar hideBackButton="true">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <table width="100%">\n      <tr>\n        <td><ion-title>Tempura</ion-title></td>\n        <td align="right"><button ion-button color="light" (click)="logout()">{{account.firstname}} {{account.lastname}} abmelden</button></td>\n      </tr>\n    </table>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h3>Zeiterfassung</h3>\n\n  <ion-item type="item-text-wrap" >\n    <div class="row" >\n      <div class="col col-10">Datum</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Pause</div>\n      <div class="col col-15">Ruhetag</div>\n      <div class="col col-15">Arbeitszeit</div>\n      <div class="col col-15"></div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\'  *ngFor="let day of worktimes">\n      <div class="col col-10">{{day.date}}</div>\n      <div class="col col-15">{{day.timeamfrom}}</div>\n      <div class="col col-15">{{day.timeamto}}</div>\n      <div class="col col-15">{{day.timepmfrom}}</div>\n      <div class="col col-15">{{day.timepmto}}</div>\n      <div class="col col-15">{{day.pause}}</div>\n      <div class="col col-15">{{day.restday}}</div>\n      <div class="col col-15">{{day.worktime}}</div>\n      <div class="col col-15"><button ion-button color="change" value="{{day.fs_user}}" (click)="change(day)"><ion-icon name="settings"></ion-icon></button><button ion-button color="danger" value="{{day.fs_user}}" (click)="delete(day.id_worktime)"><ion-icon name="trash"></ion-icon></button></div>\n    </div>\n  </ion-item>\n  <h3>Andere Einträge</h3>\n  <ion-item type="item-text-wrap">\n    <div class="row">\n      <div class="col col-10">Art</div>\n      <div class="col col-15">Datum von</div>\n      <div class="col col-15">Datum bis</div>\n      <div class="col col-15">halber Tag</div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\' *ngFor="let day of othertimes">\n      <div class="col col-10">{{day.type}}</div>\n      <div class="col col-15">{{day.datefrom}}</div>\n      <div class="col col-15">{{day.dateto}}</div>\n      <div class="col col-15">{{day.halfaday}}</div>\n    </div>\n  </ion-item>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/
     }),
     __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === "function" && _b || Object])
 ], HomePage);
@@ -58370,7 +58373,7 @@ var NewTimePage = (function () {
 NewTimePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-new-time',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/new-time/new-time.html"*/'<!--\n  Generated template for the NewTimePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Neue Zeiterfassung</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <form (ngSubmit)="createNewTime()" #registerForm="ngForm">\n    <ion-list>\n      <!--<ion-item>\n        <ion-select [(ngModel)]="newTime.type" name="type" placeholder="Art">\n          <ion-option value="work">Arbeit</ion-option>\n          <ion-option value="accident">Unfall</ion-option>\n          <ion-option value="illness">Krankheit</ion-option>\n          <ion-option value="military">Militär</ion-option>\n          <ion-option value="pregnancy">Schwangerschaft</ion-option>\n        </ion-select>\n      </ion-item>-->\n      <ion-item>\n        <ion-label>Datum:</ion-label>\n        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.date" name="date"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Von:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timeamfrom" name="timeamfrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Bis:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timeamto" name="timeamto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Von:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timepmfrom" name="timepmfrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Bis:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timepmto" name="timepmto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Pause:</ion-label>\n        <ion-select placeholder="Pause" [(ngModel)]="newTime.pause" name="pause">\n          <ion-option value="0">0 Minuten</ion-option>\n          <ion-option value="15">15 Minuten</ion-option>\n          <ion-option value="30">30 Minuten</ion-option>\n          <ion-option value="45">45 Minuten</ion-option>\n          <ion-option value="60">1 Stunde</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Ruhetage:</ion-label>\n        <ion-select placeholder="Ruhetag" [(ngModel)]="newTime.restday" name="restday">\n          <ion-option value="0">0 Tage</ion-option>\n          <ion-option value="50">0.5 Tage</ion-option>\n          <ion-option value="100">1 Tag</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n    <ion-item>\n      <button ion-button type="submit">Speichern</button>\n    </ion-item>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/new-time/new-time.html"*/,
+        selector: 'page-new-time',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/new-time/new-time.html"*/'<!--\n  Generated template for the NewTimePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Neue Zeiterfassung</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n  <form (ngSubmit)="createNewTime()" #registerForm="ngForm">\n    <ion-list>\n      <ion-item>\n        <ion-label>Datum:</ion-label>\n        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="newTime.date" name="date"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Von:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timeamfrom" name="timeamfrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Bis:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timeamto" name="timeamto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Von:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timepmfrom" name="timepmfrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Bis:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="newTime.timepmto" name="timepmto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Pause:</ion-label>\n        <ion-select placeholder="Pause" [(ngModel)]="newTime.pause" name="pause">\n          <ion-option value="0">0 Minuten</ion-option>\n          <ion-option value="15">15 Minuten</ion-option>\n          <ion-option value="30">30 Minuten</ion-option>\n          <ion-option value="45">45 Minuten</ion-option>\n          <ion-option value="60">1 Stunde</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Ruhetage:</ion-label>\n        <ion-select placeholder="Ruhetag" [(ngModel)]="newTime.restday" name="restday">\n          <ion-option value="0">0 Tage</ion-option>\n          <ion-option value="50">0.5 Tage</ion-option>\n          <ion-option value="100">1 Tag</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n    <ion-item>\n      <button ion-button type="submit">Speichern</button>\n    </ion-item>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/new-time/new-time.html"*/,
     }),
     __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]])
 ], NewTimePage);
@@ -77081,28 +77084,32 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 var map = {
-	"../pages/holiday/holiday.module": [
+	"../pages/change-time/change-time.module": [
 		267,
-		5
-	],
-	"../pages/login/login.module": [
-		268,
-		4
-	],
-	"../pages/new-nonbuisnesstime/new-nonbuisnesstime.module": [
-		269,
-		3
-	],
-	"../pages/new-time/new-time.module": [
-		270,
-		2
-	],
-	"../pages/personal/personal.module": [
-		271,
 		1
 	],
-	"../pages/report/report.module": [
+	"../pages/holiday/holiday.module": [
+		268,
+		6
+	],
+	"../pages/login/login.module": [
+		269,
+		5
+	],
+	"../pages/new-nonbuisnesstime/new-nonbuisnesstime.module": [
+		270,
+		4
+	],
+	"../pages/new-time/new-time.module": [
+		271,
+		3
+	],
+	"../pages/personal/personal.module": [
 		272,
+		2
+	],
+	"../pages/report/report.module": [
+		273,
 		0
 	]
 };
@@ -77136,8 +77143,10 @@ webpackAsyncContext.id = 200;
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_new_nonbuisnesstime_new_nonbuisnesstime__ = __webpack_require__(103);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_holiday_holiday__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_personal_personal__ = __webpack_require__(105);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__ = __webpack_require__(110);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__ = __webpack_require__(109);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__pages_report_report__ = __webpack_require__(275);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__pages_change_time_change_time__ = __webpack_require__(274);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__ = __webpack_require__(110);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__ = __webpack_require__(109);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -77145,6 +77154,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+
+
 
 
 
@@ -77172,7 +77183,9 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_7__pages_new_time_new_time__["a" /* NewTimePage */],
             __WEBPACK_IMPORTED_MODULE_8__pages_new_nonbuisnesstime_new_nonbuisnesstime__["a" /* NewNonbuisnesstimePage */],
             __WEBPACK_IMPORTED_MODULE_9__pages_holiday_holiday__["a" /* HolidayPage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_personal_personal__["a" /* PersonalPage */]
+            __WEBPACK_IMPORTED_MODULE_10__pages_personal_personal__["a" /* PersonalPage */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_report_report__["a" /* ReportPage */],
+            __WEBPACK_IMPORTED_MODULE_12__pages_change_time_change_time__["a" /* ChangeTimePage */]
         ],
         imports: [
             __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
@@ -77184,6 +77197,7 @@ AppModule = __decorate([
                     { loadChildren: '../pages/holiday/holiday.module#HolidayPageModule', name: 'HolidayPage', segment: 'holiday', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/personal/personal.module#PersonalPageModule', name: 'PersonalPage', segment: 'personal', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/new-nonbuisnesstime/new-nonbuisnesstime.module#NewNonbuisnesstimePageModule', name: 'NewNonbuisnesstimePage', segment: 'new-nonbuisnesstime', priority: 'low', defaultHistory: [] },
+                    { loadChildren: '../pages/change-time/change-time.module#ChangeTimePageModule', name: 'ChangeTimePage', segment: 'change-time', priority: 'low', defaultHistory: [] },
                     { loadChildren: '../pages/report/report.module#ReportPageModule', name: 'ReportPage', segment: 'report', priority: 'low', defaultHistory: [] }
                 ]
             }),
@@ -77196,11 +77210,13 @@ AppModule = __decorate([
             __WEBPACK_IMPORTED_MODULE_7__pages_new_time_new_time__["a" /* NewTimePage */],
             __WEBPACK_IMPORTED_MODULE_8__pages_new_nonbuisnesstime_new_nonbuisnesstime__["a" /* NewNonbuisnesstimePage */],
             __WEBPACK_IMPORTED_MODULE_9__pages_holiday_holiday__["a" /* HolidayPage */],
-            __WEBPACK_IMPORTED_MODULE_10__pages_personal_personal__["a" /* PersonalPage */]
+            __WEBPACK_IMPORTED_MODULE_10__pages_personal_personal__["a" /* PersonalPage */],
+            __WEBPACK_IMPORTED_MODULE_11__pages_report_report__["a" /* ReportPage */],
+            __WEBPACK_IMPORTED_MODULE_12__pages_change_time_change_time__["a" /* ChangeTimePage */]
         ],
         providers: [
-            __WEBPACK_IMPORTED_MODULE_11__ionic_native_status_bar__["a" /* StatusBar */],
-            __WEBPACK_IMPORTED_MODULE_12__ionic_native_splash_screen__["a" /* SplashScreen */],
+            __WEBPACK_IMPORTED_MODULE_13__ionic_native_status_bar__["a" /* StatusBar */],
+            __WEBPACK_IMPORTED_MODULE_14__ionic_native_splash_screen__["a" /* SplashScreen */],
             { provide: __WEBPACK_IMPORTED_MODULE_1__angular_core__["b" /* ErrorHandler */], useClass: __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["c" /* IonicErrorHandler */] }
         ]
     })
@@ -77409,6 +77425,7 @@ var platformBrowserDynamic = __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__pages_holiday_holiday__ = __webpack_require__(102);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__pages_personal_personal__ = __webpack_require__(105);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__pages_new_nonbuisnesstime_new_nonbuisnesstime__ = __webpack_require__(103);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__pages_report_report__ = __webpack_require__(275);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return MyApp; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -77419,6 +77436,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -77442,7 +77460,8 @@ var MyApp = (function () {
             { title: 'Neue Zeiterfassung', component: __WEBPACK_IMPORTED_MODULE_6__pages_new_time_new_time__["a" /* NewTimePage */] },
             { title: 'Neue Spezialerfassung', component: __WEBPACK_IMPORTED_MODULE_9__pages_new_nonbuisnesstime_new_nonbuisnesstime__["a" /* NewNonbuisnesstimePage */] },
             { title: 'Ferien', component: __WEBPACK_IMPORTED_MODULE_7__pages_holiday_holiday__["a" /* HolidayPage */] },
-            { title: 'Personaleinstellungen', component: __WEBPACK_IMPORTED_MODULE_8__pages_personal_personal__["a" /* PersonalPage */] }
+            { title: 'Personaleinstellungen', component: __WEBPACK_IMPORTED_MODULE_8__pages_personal_personal__["a" /* PersonalPage */] },
+            { title: 'Bericht', component: __WEBPACK_IMPORTED_MODULE_10__pages_report_report__["a" /* ReportPage */] }
         ];
     }
     MyApp.prototype.initializeApp = function () {
@@ -77463,14 +77482,15 @@ var MyApp = (function () {
 }());
 __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_9" /* ViewChild */])(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]),
-    __metadata("design:type", __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */])
+    __metadata("design:type", typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["h" /* Nav */]) === "function" && _a || Object)
 ], MyApp.prototype, "nav", void 0);
 MyApp = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/app/app.html"*/'<ion-menu id="normal_menu" [content]="content">\n  <ion-header>\n    <ion-toolbar>\n      <ion-title>Menu</ion-title>\n    </ion-toolbar>\n  </ion-header>\n\n  <ion-content>\n    <ion-list>\n      <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">\n        {{p.title}}\n      </button>\n    </ion-list>\n  </ion-content>\n\n</ion-menu>\n\n<!-- Disable swipe-to-go-back because it\'s poor UX to combine STGB with side menus -->\n<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/app/app.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
+    __metadata("design:paramtypes", [typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["i" /* Platform */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]) === "function" && _d || Object])
 ], MyApp);
 
+var _a, _b, _c, _d;
 //# sourceMappingURL=app.component.js.map
 
 /***/ }),
@@ -114735,6 +114755,132 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_platform_browser_dynamic__["a" /* platformBrowserDynamic */])().bootstrapModule(__WEBPACK_IMPORTED_MODULE_1__app_module__["a" /* AppModule */]);
 //# sourceMappingURL=main.js.map
+
+/***/ }),
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(33);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__home_home__ = __webpack_require__(30);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ChangeTimePage; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+
+/**
+ * Generated class for the ChangeTimePage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+var ChangeTimePage = (function () {
+    function ChangeTimePage(navCtrl, navParams, http) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.http = http;
+        this.time = {};
+        this.time = { id_worktime: navParams.get("id_worktime"), date: navParams.get("date"), fs_user: navParams.get("fs_user"), pause: navParams.get("pause"), restday: navParams.get("restday"), timeamfrom: navParams.get("timeamfrom"), timeamto: navParams.get("timeamto"), timepmfrom: navParams.get("timepmfrom"), timepmto: navParams.get("timepmto") };
+    }
+    ChangeTimePage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ChangeTimePage');
+        console.log(this.time);
+    };
+    ChangeTimePage.prototype.changeTime = function () {
+        var _this = this;
+        console.log(this.time);
+        var headers = new __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Headers */]();
+        //console.log(JSON.parse(this.newTime));
+        headers.append('Content-Type', 'application/json');
+        this.http.post('http://88.84.20.245/tempura/php/change_worktime.php', this.time, headers)
+            .map(function (res) { return res.json(); })
+            .subscribe(function (res) {
+            console.log("success");
+            window.alert("Eintrag geändert");
+            _this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__home_home__["a" /* HomePage */]);
+        }, function (err) {
+            console.log("changeTime() doesn't working");
+            console.log(err.toString());
+        });
+    };
+    return ChangeTimePage;
+}());
+ChangeTimePage = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
+        selector: 'page-change-time',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/change-time/change-time.html"*/'<!--\n  Generated template for the ChangeTimePage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Arbeitszeit bearbeiten</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n<form (ngSubmit)="changeTime()" #registerForm="ngForm">\n    <ion-list>\n      <ion-item>\n        <ion-label>Datum:</ion-label>\n        <ion-datetime displayFormat="DD/MM/YYYY" [(ngModel)]="time.date" name="date"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Von:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="time.timeamfrom" name="timeamfrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Bis:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="time.timeamto" name="timeamto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Von:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="time.timepmfrom" name="timepmfrom"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Bis:</ion-label>\n        <ion-datetime displayFormat="HH:mm:ss" [(ngModel)]="time.timepmto" name="timepmto"></ion-datetime>\n      </ion-item>\n      <ion-item>\n        <ion-label>Pause:</ion-label>\n        <ion-select placeholder="Pause" [(ngModel)]="time.pause" name="pause">\n          <ion-option value="0">0 Minuten</ion-option>\n          <ion-option value="15">15 Minuten</ion-option>\n          <ion-option value="30">30 Minuten</ion-option>\n          <ion-option value="45">45 Minuten</ion-option>\n          <ion-option value="60">1 Stunde</ion-option>\n        </ion-select>\n      </ion-item>\n      <ion-item>\n        <ion-label>Ruhetage:</ion-label>\n        <ion-select placeholder="Ruhetag" [(ngModel)]="time.restday" name="restday">\n          <ion-option value="0">0 Tage</ion-option>\n          <ion-option value="50">0.5 Tage</ion-option>\n          <ion-option value="100">1 Tag</ion-option>\n        </ion-select>\n      </ion-item>\n    </ion-list>\n    <ion-item>\n      <button ion-button type="submit">Speichern</button>\n    </ion-item>\n  </form>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/change-time/change-time.html"*/,
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === "function" && _c || Object])
+], ChangeTimePage);
+
+var _a, _b, _c;
+//# sourceMappingURL=change-time.js.map
+
+/***/ }),
+/* 275 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(20);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ReportPage; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+/**
+ * Generated class for the ReportPage page.
+ *
+ * See http://ionicframework.com/docs/components/#navigation for more info
+ * on Ionic pages and navigation.
+ */
+var ReportPage = (function () {
+    function ReportPage(navCtrl, navParams) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+    }
+    ReportPage.prototype.ionViewDidLoad = function () {
+        console.log('ionViewDidLoad ReportPage');
+    };
+    return ReportPage;
+}());
+ReportPage = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* IonicPage */])(),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
+        selector: 'page-report',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/report/report.html"*/'<!--\n  Generated template for the ReportPage page.\n\n  See http://ionicframework.com/docs/components/#navigation for more info on\n  Ionic pages and navigation.\n-->\n<ion-header>\n\n  <ion-navbar>\n    <ion-title>Report</ion-title>\n  </ion-navbar>\n\n</ion-header>\n\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/report/report.html"*/,
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["g" /* NavParams */]])
+], ReportPage);
+
+//# sourceMappingURL=report.js.map
 
 /***/ })
 /******/ ]);

@@ -10,6 +10,8 @@ import { NewTimePage } from '../pages/new-time/new-time';
 import { NewNonbuisnesstimePage } from '../pages/new-nonbuisnesstime/new-nonbuisnesstime';
 import { HolidayPage } from '../pages/holiday/holiday';
 import { PersonalPage } from '../pages/personal/personal';
+import { ReportPage } from '../pages/report/report';
+import { ChangeTimePage } from '../pages/change-time/change-time';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -22,7 +24,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NewTimePage,
     NewNonbuisnesstimePage,
     HolidayPage,
-    PersonalPage
+    PersonalPage,
+    ReportPage,
+    ChangeTimePage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     NewTimePage,
     NewNonbuisnesstimePage,
     HolidayPage,
-    PersonalPage
+    PersonalPage,
+    ReportPage,
+    ChangeTimePage
   ],
   providers: [
     StatusBar,

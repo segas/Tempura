@@ -3,6 +3,7 @@ import { NavController} from 'ionic-angular';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { LoginPage } from '../login/login';
+import { ChangeTimePage } from '../change-time/change-time';
 
 @Component({
   selector: 'page-home',
@@ -101,9 +102,10 @@ export class HomePage {
     console.log(id_worktime);
     this.deleteRow(id_worktime);
   }
-  change(id_worktime){
+  change(time){
     console.log("change ");
-    console.log(id_worktime);
+    console.log(time);
+    this.navCtrl.push(ChangeTimePage, time)
   }
 
   getDate(){
