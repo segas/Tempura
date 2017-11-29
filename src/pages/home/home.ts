@@ -20,9 +20,13 @@ export class HomePage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad MainPage');
 
+    this.load_Data();
+    //console.log(this.worktimes);
+  }
+
+  public load_Data(){
     this.getLast5Days(this.getDate5DaysBefore(),this.getDate());
     this.getLastMonth(this.getDateLastMonth());
-    //console.log(this.worktimes);
   }
 
   // Perform the login action when the user submits the login form
@@ -46,6 +50,19 @@ export class HomePage {
     //console.log(data);
 
     this.listOtherTimes(data);
+  }
+  deleteRow(id_worktime){
+    var data = {id: id_worktime};
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.http.post('http://88.84.20.245/tempura/php/remove_worktime.php', data, headers)
+      .map(res => res.json())
+      .subscribe(res => {
+        console.log("deleteRow() success");
+        this.load_Data();
+      }, (err) => {
+        console.log("deleteRow() failed");
+      });
   }
 
   listLast5Days(userLogin){
@@ -77,6 +94,16 @@ export class HomePage {
     console.log("Logout");
     window.sessionStorage.removeItem('account');
     this.navCtrl.setRoot(LoginPage);
+  }
+
+  delete(id_worktime){
+    console.log("delete ");
+    console.log(id_worktime);
+    this.deleteRow(id_worktime);
+  }
+  change(id_worktime){
+    console.log("change ");
+    console.log(id_worktime);
   }
 
   getDate(){
