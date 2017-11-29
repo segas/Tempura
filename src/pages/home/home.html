@@ -3,7 +3,12 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Tempura</ion-title>
+    <table width="100%">
+      <tr>
+        <td><ion-title>Tempura</ion-title></td>
+        <td align="right"><button ion-button color="light" (click)="logout()">{{account.firstname}} {{account.lastname}} abmelden</button></td>
+      </tr>
+    </table>
   </ion-navbar>
 </ion-header>
 

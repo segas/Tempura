@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController} from 'ionic-angular';
 import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
+import { LoginPage } from '../login/login';
 
 @Component({
   selector: 'page-home',
@@ -26,9 +27,10 @@ export class HomePage {
 
   // Perform the login action when the user submits the login form
   public getLast5Days(datestart, dateend) {
-    //var account = window.sessionStorage.getItem('account');
+    var account = window.sessionStorage.getItem('account');
     //console.log(datestart);
-    //this.account = JSON.parse(account);
+    this.account = JSON.parse(account);
+    console.log(this.account);
 
     var data = {id_user:this.account.id_user, datestart:datestart, dateend:dateend}
     //console.log(data);
@@ -69,6 +71,12 @@ export class HomePage {
         }, (err) => {
           console.log("listOtherTimes() failed");
         });
+  }
+
+  logout(){
+    console.log("Logout");
+    window.sessionStorage.removeItem('account');
+    this.navCtrl.setRoot(LoginPage);
   }
 
   getDate(){

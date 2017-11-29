@@ -37820,6 +37820,7 @@ function BaseInput_tsickle_Closure_declarations() {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__(24);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(33);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__login_login__ = __webpack_require__(102);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomePage; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -37830,6 +37831,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+
 
 
 
@@ -37850,9 +37852,10 @@ var HomePage = (function () {
     };
     // Perform the login action when the user submits the login form
     HomePage.prototype.getLast5Days = function (datestart, dateend) {
-        //var account = window.sessionStorage.getItem('account');
+        var account = window.sessionStorage.getItem('account');
         //console.log(datestart);
-        //this.account = JSON.parse(account);
+        this.account = JSON.parse(account);
+        console.log(this.account);
         var data = { id_user: this.account.id_user, datestart: datestart, dateend: dateend };
         //console.log(data);
         this.listLast5Days(data);
@@ -37890,6 +37893,11 @@ var HomePage = (function () {
         }, function (err) {
             console.log("listOtherTimes() failed");
         });
+    };
+    HomePage.prototype.logout = function () {
+        console.log("Logout");
+        window.sessionStorage.removeItem('account');
+        this.navCtrl.setRoot(__WEBPACK_IMPORTED_MODULE_4__login_login__["a" /* LoginPage */]);
     };
     HomePage.prototype.getDate = function () {
         var today = new Date();
@@ -37963,11 +37971,12 @@ var HomePage = (function () {
 }());
 HomePage = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_5" /* Component */])({
-        selector: 'page-home',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar hideBackButton="true">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <ion-title>Tempura</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h3>Zeiterfassung</h3>\n\n  <ion-item type="item-text-wrap" >\n    <div class="row" >\n      <div class="col col-10">Datum</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Pause</div>\n      <div class="col col-15">Ruhetag</div>\n      <div class="col col-15">Arbeitszeit</div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\'  *ngFor="let day of worktimes">\n      <div class="col col-10">{{day.date}}</div>\n      <div class="col col-15">{{day.timeamfrom}}</div>\n      <div class="col col-15">{{day.timeamto}}</div>\n      <div class="col col-15">{{day.timepmfrom}}</div>\n      <div class="col col-15">{{day.timepmto}}</div>\n      <div class="col col-15">{{day.pause}}</div>\n      <div class="col col-15">{{day.restday}}</div>\n      <div class="col col-15">{{day.worktime}}</div>\n    </div>\n  </ion-item>\n  <h3>Andere Einträge</h3>\n  <ion-item type="item-text-wrap">\n    <div class="row">\n      <div class="col col-10">Art</div>\n      <div class="col col-15">Datum von</div>\n      <div class="col col-15">Datum bis</div>\n      <div class="col col-15">halber Tag</div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\' *ngFor="let day of othertimes">\n      <div class="col col-10">{{day.type}}</div>\n      <div class="col col-15">{{day.datefrom}}</div>\n      <div class="col col-15">{{day.dateto}}</div>\n      <div class="col col-15">{{day.halfaday}}</div>\n    </div>\n  </ion-item>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/
+        selector: 'page-home',template:/*ion-inline-start:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar hideBackButton="true">\n    <button ion-button menuToggle>\n      <ion-icon name="menu"></ion-icon>\n    </button>\n    <table width="100%">\n      <tr>\n        <td><ion-title>Tempura</ion-title></td>\n        <td align="right"><button ion-button color="light" (click)="logout()">{{account.firstname}} {{account.lastname}} abmelden</button></td>\n      </tr>\n    </table>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <h3>Zeiterfassung</h3>\n\n  <ion-item type="item-text-wrap" >\n    <div class="row" >\n      <div class="col col-10">Datum</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Von</div>\n      <div class="col col-15">Bis</div>\n      <div class="col col-15">Pause</div>\n      <div class="col col-15">Ruhetag</div>\n      <div class="col col-15">Arbeitszeit</div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\'  *ngFor="let day of worktimes">\n      <div class="col col-10">{{day.date}}</div>\n      <div class="col col-15">{{day.timeamfrom}}</div>\n      <div class="col col-15">{{day.timeamto}}</div>\n      <div class="col col-15">{{day.timepmfrom}}</div>\n      <div class="col col-15">{{day.timepmto}}</div>\n      <div class="col col-15">{{day.pause}}</div>\n      <div class="col col-15">{{day.restday}}</div>\n      <div class="col col-15">{{day.worktime}}</div>\n    </div>\n  </ion-item>\n  <h3>Andere Einträge</h3>\n  <ion-item type="item-text-wrap">\n    <div class="row">\n      <div class="col col-10">Art</div>\n      <div class="col col-15">Datum von</div>\n      <div class="col col-15">Datum bis</div>\n      <div class="col col-15">halber Tag</div>\n    </div>\n    <div class="row" ng-controller=\'HomePage\' *ngFor="let day of othertimes">\n      <div class="col col-10">{{day.type}}</div>\n      <div class="col col-15">{{day.datefrom}}</div>\n      <div class="col col-15">{{day.dateto}}</div>\n      <div class="col col-15">{{day.halfaday}}</div>\n    </div>\n  </ion-item>\n\n</ion-content>\n'/*ion-inline-end:"/home/sgas/Projects/Tempura/src/pages/home/home.html"*/
     }),
-    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]])
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["f" /* NavController */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["c" /* Http */]) === "function" && _b || Object])
 ], HomePage);
 
+var _a, _b;
 //# sourceMappingURL=home.js.map
 
 /***/ }),
