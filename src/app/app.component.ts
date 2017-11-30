@@ -11,6 +11,7 @@ import { PersonalPage } from '../pages/personal/personal';
 import { NewNonbuisnesstimePage } from '../pages/new-nonbuisnesstime/new-nonbuisnesstime';
 import { ReportPage } from '../pages/report/report';
 import { ChangeTimePage } from '../pages/change-time/change-time';
+import { ChangeNonbuisnesstimePage } from '../pages/change-nonbuisnesstime/change-nonbuisnesstime';
 
 @Component({
   templateUrl: 'app.html'

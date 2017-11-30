@@ -4,6 +4,7 @@ import {Http, Headers} from '@angular/http';
 import 'rxjs/add/operator/map';
 import { LoginPage } from '../login/login';
 import { ChangeTimePage } from '../change-time/change-time';
+import { ChangeNonbuisnesstimePage } from '../change-nonbuisnesstime/change-nonbuisnesstime';
 
 @Component({
   selector: 'page-home',
@@ -65,6 +66,20 @@ export class HomePage {
         console.log("deleteRow() failed");
       });
   }
+  deleteRowNonBuisness(id_nonbuisnesstime){
+    var data = {id: id_nonbuisnesstime};
+    console.log(data);
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.http.post('http://88.84.20.245/tempura/php/remove_nonbuisness.php', data, headers)
+      .map(res => res.json())
+      .subscribe(res => {
+        console.log("deleteRow() success");
+        this.load_Data();
+      }, (err) => {
+        console.log("deleteRow() failed");
+      });
+  }
 
   listLast5Days(userLogin){
     let headers = new Headers();
@@ -106,6 +121,17 @@ export class HomePage {
     console.log("change ");
     console.log(time);
     this.navCtrl.push(ChangeTimePage, time)
+  }
+  deletenonbuisness(id_nonbuisnesstime){
+    console.log("delete nonbuisness");
+    console.log(id_nonbuisnesstime);
+    this.deleteRowNonBuisness(id_nonbuisnesstime);
+
+  }
+  changenonbuisness(nonbuisness){
+    console.log("change nonbuisness");
+    console.log(nonbuisness);
+    this.navCtrl.push(ChangeNonbuisnesstimePage, nonbuisness)
   }
 
   getDate(){

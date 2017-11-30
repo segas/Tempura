@@ -46,12 +46,14 @@
       <div class="col col-15">Datum von</div>
       <div class="col col-15">Datum bis</div>
       <div class="col col-15">halber Tag</div>
+      <div class="col col-15"></div>
     </div>
     <div class="row" ng-controller='HomePage' *ngFor="let day of othertimes">
       <div class="col col-10">{{day.type}}</div>
       <div class="col col-15">{{day.datefrom}}</div>
       <div class="col col-15">{{day.dateto}}</div>
       <div class="col col-15">{{day.halfaday}}</div>
+      <div class="col col-15"><button ion-button color="change" value="{{day.fs_user}}" (click)="changenonbuisness(day)"><ion-icon name="settings"></ion-icon></button><button ion-button color="danger" value="{{day.fs_user}}" (click)="deletenonbuisness(day.id_nonbuisnesstime)"><ion-icon name="trash"></ion-icon></button></div>
     </div>
   </ion-item>
 

@@ -25,9 +25,10 @@ export class ReportPage {
   account = {id_user:0};
   time = {month: null, year: null};
 
+
   ionViewDidLoad() {
     console.log('ionViewDidLoad ReportPage');
-    this.getLastMonth();
+    //this.getLastMonth();
   }
 
   getLastMonth() {
@@ -36,11 +37,13 @@ export class ReportPage {
     this.account = JSON.parse(account);
     console.log(this.account);
 
-    var data = {id_user:this.account.id_user, month:this.time.month, year:this.time.year}
-    //console.log(data);
+    this.time.year = this.time.month.substring(0,this.time.month.length-3);
+    this.time.month = this.time.month.substring(5,this.time.month.length);
 
-    this.listOtherTimes(data);
-    this.listLastMonthWorktime(data);
+    var data = {id_user:this.account.id_user, month:this.time.month, year:this.time.year};
+    console.log(data);
+
+    this.listReport(data);
   }
 
   deleteRow(id_worktime){
@@ -57,34 +60,22 @@ export class ReportPage {
       });
   }
 
-  listLastMonthWorktime(userLogin){
+  listReport(userLogin){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    this.http.post('http://88.84.20.245/tempura/php/get_report_worktime.php',userLogin,headers)
+    this.http.post('http://88.84.20.245/tempura/php/get_report.php',userLogin,headers)
       .map(res => res.json())
       .subscribe(res => {
         this.worktimes = res.worktime;
         console.log("success " + JSON.stringify(this.worktimes));
       }, (err) => {
-        console.log("listLastMonthWorktime() failed");
+        console.log("listReport() failed");
       });
-  }
-  listOtherTimes(userLogin){
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json');
-    this.http.post('http://88.84.20.245/tempura/php/get_report_other_times.php',userLogin,headers)
-        .map(res => res.json())
-        .subscribe(res => {
-          this.othertimes = res.othertime;
-          console.log("success " + JSON.stringify(this.othertimes));
-        }, (err) => {
-          console.log("listOtherTimes() failed");
-        });
   }
   change(time){
     console.log("change ");
     console.log(time);
-    this.navCtrl.push(ChangeTimePage, time)
+    this.navCtrl.push(ChangeTimePage, time);
   }
   delete(id_worktime){
     console.log("delete ");

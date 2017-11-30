@@ -1,0 +1,145 @@
+SELECT id_user, username, holiday_days FROM user
+
+SELECT fs_user,
+CASE
+	WHEN halfaday='0' THEN DATEDIFF(dateto,datefrom)
+    WHEN halfaday='1' THEN '1'
+    ELSE '0'
+END AS d
+FROM nonbuisnesstime
+
+
+SELECT fs_user,
+sum(CASE
+	WHEN halfaday='0' THEN DATEDIFF(dateto,datefrom)
+    WHEN halfaday='1' THEN '0.5'
+    ELSE '0'
+END) AS d
+FROM nonbuisnesstime
+GROUP BY fs_user
+
+SELECT A.id_user, A.username, A.holiday_days, B.used_days  FROM
+(SELECT id_user, username, holiday_days FROM user) as A
+LEFT JOIN (SELECT fs_user,
+sum(CASE
+	WHEN halfaday='0' THEN DATEDIFF(dateto,datefrom)
+    WHEN halfaday='1' THEN '0.5'
+    ELSE '0'
+END) AS used_days
+FROM nonbuisnesstime
+GROUP BY fs_user) as B ON A.id_user=B.fs_user
+
+SELECT A.id_user, A.username, A.holiday_days, B.used_days, (A.holiday_days - B.used_days) as open_holiday_days  FROM
+(SELECT id_user, username, holiday_days FROM user) as A
+LEFT JOIN (SELECT fs_user,
+sum(CASE
+	WHEN halfaday='0' THEN DATEDIFF(dateto,datefrom) + 1
+    WHEN halfaday='1' THEN '0.5'
+    ELSE '0'
+END) AS used_days
+FROM nonbuisnesstime
+GROUP BY fs_user) as B ON A.id_user=B.fs_user
+
+
+SELECT * FROM `worktime` WHERE fs_user='0' AND MONTH(date) = 11 AND YEAR(date) = 2017
+
+SELECT * FROM `nonbuisnesstime` WHERE fs_user='0' AND ((MONTH(datefrom) = 11 AND YEAR(datefrom) = 2017) OR (MONTH(dateto) = 11 AND YEAR(dateto) = 2017))
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+DROP TABLE IF EXISTS time_dimension;
+CREATE TABLE time_dimension (
+        id                      INTEGER PRIMARY KEY,  -- year*10000+month*100+day
+        db_date                 DATE NOT NULL,
+        year                    INTEGER NOT NULL,
+        month                   INTEGER NOT NULL, -- 1 to 12
+        day                     INTEGER NOT NULL, -- 1 to 31
+        quarter                 INTEGER NOT NULL, -- 1 to 4
+        week                    INTEGER NOT NULL, -- 1 to 52/53
+        day_name                VARCHAR(9) NOT NULL, -- 'Monday', 'Tuesday'...
+        month_name              VARCHAR(9) NOT NULL, -- 'January', 'February'...
+        holiday_flag            CHAR(1) DEFAULT 'f' CHECK (holiday_flag in ('t', 'f')),
+        weekend_flag            CHAR(1) DEFAULT 'f' CHECK (weekday_flag in ('t', 'f')),
+        event                   VARCHAR(50),
+        UNIQUE td_ymd_idx (year,month,day),
+        UNIQUE td_dbdate_idx (db_date)
+
+) Engine=MyISAM;
+
+DROP PROCEDURE IF EXISTS fill_date_dimension;
+DELIMITER //
+CREATE PROCEDURE fill_date_dimension(IN startdate DATE,IN stopdate DATE)
+BEGIN
+    DECLARE currentdate DATE;
+    SET currentdate = startdate;
+    WHILE currentdate < stopdate DO
+        INSERT INTO time_dimension VALUES (
+                        YEAR(currentdate)*10000+MONTH(currentdate)*100 + DAY(currentdate),
+                        currentdate,
+                        YEAR(currentdate),
+                        MONTH(currentdate),
+                        DAY(currentdate),
+                        QUARTER(currentdate),
+                        WEEKOFYEAR(currentdate),
+                        DATE_FORMAT(currentdate,'%W'),
+                        DATE_FORMAT(currentdate,'%M'),
+                        'f',
+                        CASE DAYOFWEEK(currentdate) WHEN 1 THEN 't' WHEN 7 then 't' ELSE 'f' END,
+                        NULL);
+        SET currentdate = ADDDATE(currentdate,INTERVAL 1 DAY);
+    END WHILE;
+END
+//
+DELIMITER ;
+
+TRUNCATE TABLE time_dimension;
+
+CALL fill_date_dimension('2000-01-01','2100-01-01');
+OPTIMIZE TABLE time_dimension;
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SELECT n.type, t.db_date AS start, fs_user
+FROM nonbuisnesstime n
+INNER JOIN time_dimension t
+	ON t.db_date BETWEEN n.datefrom AND n.dateto  
+WHERE halfaday='0'
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SELECT n.type, t.db_date AS start, fs_user
+FROM nonbuisnesstime n
+INNER JOIN time_dimension t
+	ON t.db_date BETWEEN n.datefrom AND n.dateto  
+WHERE halfaday='0'
+UNION
+SELECT type, datefrom AS start, fs_user
+FROM nonbuisnesstime
+WHERE halfaday='1'
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+select w.id_worktime,
+	w.date,
+	w.timeamfrom,
+	w.timeamto,
+	w.timepmfrom,
+	w.timepmto,
+	w.pause,
+	w.restday,
+	w.fs_user,
+	timediff(timediff(w.timepmto, w.timeamfrom), timediff(w.timepmfrom,w.timeamto)) AS worktime,
+    t.day_name
+from worktime AS w
+LEFT JOIN time_dimension AS t
+	ON w.date = t.db_date
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+SELECT day_name, date, 'Arbeit' as type, timeamfrom, timeamto, timepmfrom, timepmto, pause, restday, worktime, fs_user
+FROM `worktime_view`
+UNION
+SELECT day_name, date, type,null as timeamfrom, null as timeamto, null as timepmfrom, null as timepmto, null as pause, null as restday, null as worktime ,fs_user FROM nonbuisnesstime_view
+ORDER By date ASC
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
