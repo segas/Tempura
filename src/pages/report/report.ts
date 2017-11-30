@@ -44,6 +44,9 @@ export class ReportPage {
     console.log(data);
 
     this.listReport(data);
+    this.getholidaydays(data);
+    this.getremainingholidaydays(data);
+    this.getworktime(data);
   }
 
   deleteRow(id_worktime){
@@ -81,5 +84,42 @@ export class ReportPage {
     console.log("delete ");
     console.log(id_worktime);
     this.deleteRow(id_worktime);
+  }
+
+  getworktime(data){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.http.post('http://88.84.20.245/tempura/php/get_worktime_month.php',data,headers)
+      .map(res => res.json())
+      .subscribe(res => {
+        this.worktimes = res.worktime;
+        console.log("success " + JSON.stringify(this.worktimes));
+      }, (err) => {
+        console.log("listReport() failed");
+      });
+  }
+  getholidaydays(data){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.http.post('http://88.84.20.245/tempura/php/get_usedholidaydays.php',data,headers)
+      .map(res => res.json())
+      .subscribe(res => {
+        this.worktimes = res.worktime;
+        console.log("success " + JSON.stringify(this.worktimes));
+      }, (err) => {
+        console.log("listReport() failed");
+      });
+  }
+  getremainingholidaydays(data){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    this.http.post('http://88.84.20.245/tempura/php/get_remaining_holiday_days.php',data,headers)
+      .map(res => res.json())
+      .subscribe(res => {
+        this.worktimes = res.worktime;
+        console.log("success " + JSON.stringify(this.worktimes));
+      }, (err) => {
+        console.log("listReport() failed");
+      });
   }
 }

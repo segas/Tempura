@@ -6,9 +6,9 @@ webpackJsonp([1],{
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(16);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__report__ = __webpack_require__(107);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReportPageModule", function() { return ReportPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(13);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__personal__ = __webpack_require__(107);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "PersonalPageModule", function() { return PersonalPageModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -18,26 +18,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 
 
 
-var ReportPageModule = (function () {
-    function ReportPageModule() {
+var PersonalPageModule = (function () {
+    function PersonalPageModule() {
     }
-    return ReportPageModule;
+    return PersonalPageModule;
 }());
-ReportPageModule = __decorate([
+PersonalPageModule = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["a" /* NgModule */])({
         declarations: [
-            __WEBPACK_IMPORTED_MODULE_2__report__["a" /* ReportPage */],
+            __WEBPACK_IMPORTED_MODULE_2__personal__["a" /* PersonalPage */],
         ],
         imports: [
-            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__report__["a" /* ReportPage */]),
+            __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* IonicPageModule */].forChild(__WEBPACK_IMPORTED_MODULE_2__personal__["a" /* PersonalPage */]),
         ],
         exports: [
-            __WEBPACK_IMPORTED_MODULE_2__report__["a" /* ReportPage */]
+            __WEBPACK_IMPORTED_MODULE_2__personal__["a" /* PersonalPage */]
         ]
     })
-], ReportPageModule);
+], PersonalPageModule);
 
-//# sourceMappingURL=report.module.js.map
+//# sourceMappingURL=personal.module.js.map
 
 /***/ })
 

@@ -20,10 +20,10 @@
   </ion-item>
 
   <ion-item type="item-text-wrap" >
-    <div class="row" >
-      <div class="col col-20">Tag</div>
-      <div class="col col-20">Datum</div>
-      <div class="col col-20">Art</div>
+    <div class="row">
+      <div class="col col-15">Tag</div>
+      <div class="col col-15">Datum</div>
+      <div class="col col-15">Art</div>
       <div class="col col-15">Morgen Von</div>
       <div class="col col-15">Morgen Bis</div>
       <div class="col col-15">Nachmittag Von</div>
@@ -31,7 +31,6 @@
       <div class="col col-15">Pause</div>
       <div class="col col-15">Ruhetag</div>
       <div class="col col-15">Arbeitszeit</div>
-      <div class="col col-15"></div>
     </div>
     <div class="row" ng-controller='HomePage'  *ngFor="let day of worktimes">
       <div class="col col-15">{{day.day_name}}</div>
@@ -44,7 +43,6 @@
       <div class="col col-15">{{day.pause}}</div>
       <div class="col col-15">{{day.restday}}</div>
       <div class="col col-15">{{day.worktime}}</div>
-      <div class="col col-15"><button ion-button color="change" value="{{day.fs_user}}" (click)="change(day)"><ion-icon name="settings"></ion-icon></button><button ion-button color="danger" value="{{day.fs_user}}" (click)="delete(day.id_worktime)"><ion-icon name="trash"></ion-icon></button></div>
     </div>
   </ion-item>
 </ion-content>

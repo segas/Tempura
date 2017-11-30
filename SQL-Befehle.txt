@@ -1,51 +1,19 @@
-SELECT id_user, username, holiday_days FROM user
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+View: user_holiday
+------------------
 
-SELECT fs_user,
-CASE
-	WHEN halfaday='0' THEN DATEDIFF(dateto,datefrom)
-    WHEN halfaday='1' THEN '1'
-    ELSE '0'
-END AS d
-FROM nonbuisnesstime
+SELECT u.id_user,
+	u.username,
+	u.holiday_days,
+	n.used_days,
+	(u.holiday_days - n.used_days) AS open_holiday_days
+FROM user AS u
+Left JOIN (SELECT fs_user, COUNT(type) AS used_days FROM `nonbuisnesstime_view` WHERE type='Ferien' Group By fs_user) AS n
+ON u.id_user=n.fs_user
 
-
-SELECT fs_user,
-sum(CASE
-	WHEN halfaday='0' THEN DATEDIFF(dateto,datefrom)
-    WHEN halfaday='1' THEN '0.5'
-    ELSE '0'
-END) AS d
-FROM nonbuisnesstime
-GROUP BY fs_user
-
-SELECT A.id_user, A.username, A.holiday_days, B.used_days  FROM
-(SELECT id_user, username, holiday_days FROM user) as A
-LEFT JOIN (SELECT fs_user,
-sum(CASE
-	WHEN halfaday='0' THEN DATEDIFF(dateto,datefrom)
-    WHEN halfaday='1' THEN '0.5'
-    ELSE '0'
-END) AS used_days
-FROM nonbuisnesstime
-GROUP BY fs_user) as B ON A.id_user=B.fs_user
-
-SELECT A.id_user, A.username, A.holiday_days, B.used_days, (A.holiday_days - B.used_days) as open_holiday_days  FROM
-(SELECT id_user, username, holiday_days FROM user) as A
-LEFT JOIN (SELECT fs_user,
-sum(CASE
-	WHEN halfaday='0' THEN DATEDIFF(dateto,datefrom) + 1
-    WHEN halfaday='1' THEN '0.5'
-    ELSE '0'
-END) AS used_days
-FROM nonbuisnesstime
-GROUP BY fs_user) as B ON A.id_user=B.fs_user
-
-
-SELECT * FROM `worktime` WHERE fs_user='0' AND MONTH(date) = 11 AND YEAR(date) = 2017
-
-SELECT * FROM `nonbuisnesstime` WHERE fs_user='0' AND ((MONTH(datefrom) = 11 AND YEAR(datefrom) = 2017) OR (MONTH(dateto) = 11 AND YEAR(dateto) = 2017))
-
-------------------------------------------------------------------------------------------------------------------------------------------------------
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+Table: time_dimension
+---------------------
 
 DROP TABLE IF EXISTS time_dimension;
 CREATE TABLE time_dimension (
@@ -98,26 +66,28 @@ CALL fill_date_dimension('2000-01-01','2100-01-01');
 OPTIMIZE TABLE time_dimension;
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+nonbuisness_view
+-----------------
 
-SELECT n.type, t.db_date AS start, fs_user
+SELECT n.type,
+	t.db_date AS start,
+	n.fs_user,
+	n.halfaday
 FROM nonbuisnesstime n
 INNER JOIN time_dimension t
-	ON t.db_date BETWEEN n.datefrom AND n.dateto  
-WHERE halfaday='0'
-
------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-SELECT n.type, t.db_date AS start, fs_user
-FROM nonbuisnesstime n
-INNER JOIN time_dimension t
-	ON t.db_date BETWEEN n.datefrom AND n.dateto  
+	ON t.db_date BETWEEN n.datefrom AND n.dateto
 WHERE halfaday='0'
 UNION
-SELECT type, datefrom AS start, fs_user
+SELECT type,
+	datefrom AS start,
+	fs_user,
+	halfaday
 FROM nonbuisnesstime
 WHERE halfaday='1'
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+worktime_view
+-------------
 
 select w.id_worktime,
 	w.date,
@@ -135,11 +105,50 @@ LEFT JOIN time_dimension AS t
 	ON w.date = t.db_date
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
+report_view
+-----------
 
-SELECT day_name, date, 'Arbeit' as type, timeamfrom, timeamto, timepmfrom, timepmto, pause, restday, worktime, fs_user
+SELECT day_name,
+	date,
+	'Arbeit' as type,
+	timeamfrom,
+	timeamto,
+	timepmfrom,
+	timepmto,
+	pause,
+	restday,
+	worktime,
+	fs_user
 FROM `worktime_view`
 UNION
-SELECT day_name, date, type,null as timeamfrom, null as timeamto, null as timepmfrom, null as timepmto, null as pause, null as restday, null as worktime ,fs_user FROM nonbuisnesstime_view
+SELECT day_name,
+	date,
+	type,
+	null as timeamfrom,
+	null as timeamto,
+	null as timepmfrom,
+	null as timepmto,
+	null as pause,
+	null as restday,
+	null as worktime,
+	fs_user
+FROM nonbuisnesstime_view
 ORDER By date ASC
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Arbeitszeit vom letzten Monat ausrechnen
+----------------------------------------
+
+SELECT SEC_TO_TIME(SUM( TIME_TO_SEC(worktime))) as worktime
+FROM report_view
+WHERE fs_user='0' AND MONTH(date) = 11 AND YEAR(date) = 2017
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------
+Ferientage im letzten Monat zählen
+----------------------------------
+
+SELECT COUNT(type)
+FROM report_view
+WHERE type='Ferien' AND fs_user='0' AND MONTH(date) = 11 AND YEAR(date) = 2017
 
 -----------------------------------------------------------------------------------------------------------------------------------------------------------
